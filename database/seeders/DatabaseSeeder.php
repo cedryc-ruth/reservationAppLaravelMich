@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             $representations = Representation::inRandomOrder()->take(rand(1,2))->pluck('id');
             $user->representations()->attach($representations,['places' => rand(1,4)]);
 
+            
         }
 
         // $this->call(AdminSeeder::class);
