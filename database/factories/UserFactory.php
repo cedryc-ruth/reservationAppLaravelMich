@@ -31,15 +31,6 @@ class UserFactory extends Factory
             'language_id' => $this->faker->randomElement($languages),
         ];
 
-        // return [
-        //     'name' => 'Michaël Bat.',
-        //     'email' => 'michael.batn@outlook.com',
-        //     'email_verified_at' => now(),
-        //     'password' => Hash::make('habaligani'),
-        //     'remember_token' => Str::random(10),
-        //     'role_id'=>1,
-        //     'language_id' =>1,
-        // ];
     }
 
     /**
