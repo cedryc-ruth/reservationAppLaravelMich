@@ -22,36 +22,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(ArtistSeeder::class);
-        // $this->call(TypeSeeder::class);
+        $this->call(ArtistSeeder::class);
+        $this->call(TypeSeeder::class);
 
-        // foreach (Artist::all() as $artist) {
-        //     $types = Type::inRandomOrder()->take(rand(1,3))->pluck('id');
-        //     $artist->types()->attach($types);
+        foreach (Artist::all() as $artist) {
+            $types = Type::inRandomOrder()->take(rand(1,3))->pluck('id');
+            $artist->types()->attach($types);
             
-        // }
+        }
 
-        // $this->call(LocalitySeeder::class);
-        // $this->call(LocationSeeder::class);
-        // $this->call(ShowSeeder::class);
+        $this->call(LocalitySeeder::class);
+        $this->call(LocationSeeder::class);
+        $this->call(ShowSeeder::class);
 
-        // foreach (Show::all() as $show) {
-        //     $artist_types = ArtistType::inRandomOrder()->take(rand(1,3))->pluck('id');
-        //     $show->artist_types()->attach($artist_types);
-        // }
+        foreach (Show::all() as $show) {
+            $artist_types = ArtistType::inRandomOrder()->take(rand(1,3))->pluck('id');
+            $show->artist_types()->attach($artist_types);
+        }
 
-        // $this->call(RepresentationSeeder::class);
-        // $this->call(LanguageSeeder::class);
-        // $this->call(UserSeeder::class);
+        $this->call(RepresentationSeeder::class);
+        $this->call(LanguageSeeder::class);
+        $this->call(UserSeeder::class);
 
 
-        // foreach (User::all() as $user) {
-        //     $representations = Representation::inRandomOrder()->take(rand(1,2))->pluck('id');
-        //     $user->representations()->attach($representations,['places' => rand(1,4)]);
+        foreach (User::all() as $user) {
+            $representations = Representation::inRandomOrder()->take(rand(1,2))->pluck('id');
+            $user->representations()->attach($representations,['places' => rand(1,4)]);
 
-        // }
+        }
 
-        $this->call(AdminSeeder::class);
+        // $this->call(AdminSeeder::class);
 
     }
 }

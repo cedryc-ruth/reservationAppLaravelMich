@@ -19,27 +19,27 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        // $languages = Language::pluck('id');
-
-        // return [
-        //     'name' => $this->faker->name(),
-        //     'email' => $this->faker->unique()->safeEmail(),
-        //     'email_verified_at' => now(),
-        //     'password' => Hash::make('habaligani'),
-        //     'remember_token' => Str::random(10),
-        //     'role_id'=>2,
-        //     'language_id' => $this->faker->randomElement($languages),
-        // ];
+        $languages = Language::pluck('id');
 
         return [
-            'name' => 'Michaël Bat.',
-            'email' => 'michael.batn@outlook.com',
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('habaligani'),
             'remember_token' => Str::random(10),
-            'role_id'=>1,
-            'language_id' =>1,
+            'role_id'=>2,
+            'language_id' => $this->faker->randomElement($languages),
         ];
+
+        // return [
+        //     'name' => 'Michaël Bat.',
+        //     'email' => 'michael.batn@outlook.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('habaligani'),
+        //     'remember_token' => Str::random(10),
+        //     'role_id'=>1,
+        //     'language_id' =>1,
+        // ];
     }
 
     /**
