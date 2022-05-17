@@ -14,6 +14,8 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\LanguageSeeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -51,10 +53,6 @@ class DatabaseSeeder extends Seeder
             $user->representations()->attach($representations, ['places' => rand(1, 4)]);
         }
 
-        // $this->call(AdminSeeder::class);
-
-        $languages = Language::pluck('id');
-
         User::create([
             'name' => 'Michaël Bat.',
             'email' => 'michael.batn@outlook.com',
@@ -62,7 +60,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('habaligani'),
             'remember_token' => Str::random(10),
             'role_id'=>null,
-            'language_id' => $this->faker->randomElement($languages),
+            'language_id' => null,
         ]);
     }
 }
