@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('habaligani'),
             'remember_token' => Str::random(10),
-            'role_id'=>2,
+            'role_id'=>null,
             'language_id' => $this->faker->randomElement($languages),
         ];
 
