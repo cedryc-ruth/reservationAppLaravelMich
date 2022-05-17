@@ -1,0 +1,22 @@
+.card-body{
+    box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)
+}
+
+.card{
+    margin: 20px 10px;
+}
+
+.card-body a{
+    color:#0c7f90;
+    text-decoration: none;
+    font-size: 15px;
+    margin-top: auto;
+    font-weight: 600;
+    color: #fff;
+}
+
+.card-body a:hover{
+    color: #63a6b0;
+    text-decoration: none;
+
+}
