@@ -66,7 +66,9 @@ class ShopController extends Controller
     public function showById($id)
     {
         $show = Show::where('id', $id)->firstOrFail();
-        return view('product', compact('show'));
+        $representation = Representation::where('show_id', $show->id)->firstOrFail();
+
+        return view('product', compact('show','representation'));
     }
 
     /**

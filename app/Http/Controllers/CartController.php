@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Representation;
 use App\Models\Show;
 use Illuminate\Http\Request;
 use Database\Seeders\ShowSeeder;
@@ -38,17 +39,22 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $duplicata = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id == $request->show_id;
-        });
+        
+
+        // $duplicata = Cart::search(function ($cartItem, $rowId) use ($request) {
+        //     $representation = Representation::findOrFail($request->representation_id);
+        //     return $cartItem->id == $request->show_id && $representation->id == $request->representation_id;
+        // });
       
 
-        if ($duplicata->isNotEmpty()) {
-            return redirect()->route('cart.index')->with('danger', 'Le spectacle a déjà été ajouté à votre panier');
-        }
+        // if ($duplicata->isNotEmpty()) {
+        //     return redirect()->route('cart.index')->with('danger', 'Le spectacle a déjà été ajouté à votre panier');
+        // }
 
         $show = Show::findOrFail($request->show_id);
-        Cart::add($show->id, $show->title, 1, $show->price)->associate('App\Models\Show');
+        $cart = Cart::add($show->id, $show->title, 1, $show->price)->associate('App\Models\Show');
+        
+        // dd($cart);
 
         return redirect()->route('cart.index')->with('success', 'Le spectacles a été bien ajouté à votre panier');
     }
@@ -99,23 +105,6 @@ class CartController extends Controller
         return redirect()->back()->with('success','Le spectacle a été enlevé de votre panier');
     }
 
-    public function save($id)
-    {
-        // Récupérer l'élément à sauvegarder du panier
-
-        $item = Cart::get($id);
-
-        // On supprime l'élément à sauvegarder du panier
-
-        Cart::remove($id);
-
-        // Ajouter l'item à une nouvelle instance 'save' de cart
-
-        Cart::instance('save')->add($item->id, $item->name,1,$item->price)->associate('App\Models\Show');
-
-        return redirect()->route("cart.index")->with('success','Produit sauvegardé pour plus tard');
-
-    }
 
     public function reset()
     {

@@ -37,6 +37,7 @@
     <div id="app">
         @include('layouts.header')
         @yield('content')
+        @yield('extra-js')
         @include('layouts.footer')
     </div>
 

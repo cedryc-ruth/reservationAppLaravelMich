@@ -35,26 +35,36 @@
                 <div class="col-lg-5 offset-lg-1">
                     <div class="s_product_text">
                         <h3>{{ $show->title }}</h3>
-                        <h2>{{ $show->price }} &euro;</h2>
-                        <ul class="list">
-                            <li><a href="#"><span>Reservable: </span> {{ $show->bookable ? 'Oui' : 'Non' }}</a></li>
-                        </ul>
-                        <p class="fs-2"><i class="fa-solid fa-calendar-days mx-1"></i>Dates de representation: <br>
+                        <h2 class="mb-5">{{ $show->price }} &euro; </h2>
+                        <h6 class="mb-5"><i class="fa-solid fa-ticket mx-1"></i>Reservable:
+                            {{ $show->bookable ? 'Oui' : 'Non' }}</h6>
+                        <h6 class="mb-5"><i class="fa-solid fa-film mx-1"></i>Salle de spectacle:
+                            {{ $representation->location->designation }} </h6>
+                        <h6 class="mb-5"><i class="fa-solid fa-location-dot mx-1"></i>Adresse:
+                            {{ $representation->location->address }}
+                            ,
+                            {{ $representation->location->locality->postal_code }}
+                            {{ $representation->location->locality->locality }}</h6>
 
-                            @foreach ($show->representations as $item)
-                                {{ $item->when->format('d-m-Y à H:i:s') }}<br>
-                            @endforeach
-
-                        </p>
-                        <p><i class="fa-solid fa-film mx-1"></i>Salle de spectacle: {{ $representation->location->designation }} </p>
-                        <p><i class="fa-solid fa-location-dot mx-2"></i>Adresse: {{ $representation->location->address }} ,
-                                            {{ $representation->location->locality->postal_code }}
-                                            {{ $representation->location->locality->locality }}</p>
-                        
                         <form action="{{ route('cart.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="show_id" value="{{ $show->id }}">
-                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-cart-shopping mx-1"></i>Ajouter au panier</button>
+                            <div class="form-group mb-5">
+                                <label for="representation_id" class="form-label">
+                                    <h6 class=""><i class="fa-solid fa-calendar-days mx-1"></i>Choisir une
+                                        date de
+                                        représentation: </h6>
+                                </label>
+                                <select class="form-select mb-5" id="representation_id" name="representation_id">
+                                    @foreach ($show->representations as $representation)
+                                        <option value="{{ $representation->id }}">
+                                            {{ $representation->when->format('d-m-Y à H:i:s') }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="fa-solid fa-cart-shopping mx-1"></i>Ajouter au panier</button>
                         </form>
                     </div>
                 </div>

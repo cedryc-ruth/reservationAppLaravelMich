@@ -9,6 +9,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SaveCartController;
 
 /*
@@ -44,19 +45,13 @@ Route::get('/cart', [CartController::class,'index'])->name('cart.index');
 Route::post('/cart/store',[CartController::class,'store'])->name('cart.store');
 Route::get('/reset', [CartController::class,'reset'])->name('cart.reset');
 Route::delete('/cart/{show}/destroy',[CartController::class,'destroy'])->name('cart.destroy');
-Route::post('/cart/{show}/save',[CartController::class,'save'])->name('cart.save');
-
-// Save Cart
-
-
-Route::delete('/save/{show}/destroy',[SaveCartController::class,'destroy'])->name('save.destroy');
-Route::post('/save/{show}/store',[SaveCartController::class,'store'])->name('save.store');
 
 
 // Checkout
 
-Route::get('/checkout', [MainController::class,'checkout'])->name('checkout.index');
-Route::get('/checkout/success', [MainController::class,'success'])->name('checkout.success');
+Route::get('/checkout', [CheckoutController::class,'index'])->name('checkout.index');
+Route::post('/checkout/store',[CheckoutController::class,'store'])->name('checkout.store');
+Route::get('/checkout/success', [CheckoutController::class,'success'])->name('checkout.success');
 
 // Orders
 

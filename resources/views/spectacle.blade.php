@@ -49,9 +49,6 @@
                                             <li>{{ $representation->location->designation }}</li>
                                         @endforeach
                                     </ul>
-                                   
-
-
                                     </p>
                                     <p><i class="fa-solid fa-money-bill mx-1"></i>Prix d'entrée:<strong
                                             class="card-text mb-auto mx-1">{{ $show->price }}

@@ -3,18 +3,20 @@
 namespace App\Models;
 
 use App\Models\Language;
+use Laravel\Cashier\Billable;
 use App\Models\Representation;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Auth\Authenticatable ;
 use Illuminate\Notifications\Notifiable;
+// use Illuminate\Foundation\Auth\User as Authenticatable ;
+use TCG\Voyager\Models\User as VoyagerUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable ;
-use TCG\Voyager\Models\User as VoyagerUser;
 
 
 class User extends VoyagerUser implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Authenticatable,Billable;
 
     // public $timestamps = false;
     /**

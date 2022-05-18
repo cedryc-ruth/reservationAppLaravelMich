@@ -47,7 +47,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="p-2 px-3 text-uppercase">Spectacle(s) <span class="text-lowercase">(Cliquez sur</span> </div>
+                                                <div class="p-2 px-3 text-uppercase">Spectacle(s) </div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
                                                 <div class="py-2 text-uppercase">Prix</div>
@@ -70,7 +70,7 @@
                                                                 alt="image spectacle" width="70"
                                                                 class="img-fluid rounded shadow-sm"></a>
                                                         <div class="ml-3 d-inline-block align-middle">
-                                                            <h5 class="mb-0">
+                                                            {{-- <h5 class="mb-0">
                                                                 <select class="form-select" name="language_id"
                                                                     id="language_id">
                                                                     <option selected>Choisissez une date</option>
@@ -84,7 +84,7 @@
                                                                         @endif
                                                                     @endforeach
                                                                 </select>
-                                                            </h5>
+                                                            </h5> --}}
                                                         </div>
                                                     </div>
                                                 </th>
@@ -100,11 +100,6 @@
                                                         <button type="submit" class="btn btn-danger mx-2"><i
                                                                 class="fa fa-trash"></i></button>
                                                     </form>
-                                                    <form action="{{ route('cart.save', $show->rowId) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-warning"><i
-                                                                class="fa-solid fa-plus"></i></button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -119,7 +114,7 @@
 
                         </div>
                         <div class="col-lg-6">
-                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">
+                            <div class="bg-light px-4 py-3 font-weight-bold">
                                 <h3 class="text-center">Détails de la commande</h3>
                                 <div class="p-4">
                                     <ul class="list-unstyled mb-4">
@@ -135,10 +130,10 @@
                                         </li>
                                     </ul>
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{ route('checkout.index') }}" class="btn btn-warning mx-2"><i
+                                        <a href="{{ route('checkout.index') }}" class="btn btn-info mx-2"><i
                                                 class="fa-solid fa-credit-card mx-1"></i>Passez à la caisse</a>
-                                        <a href="{{ route('spectacles') }}" class="btn btn-info"><i
-                                                class="fa-solid fa-masks-theater mx-2"></i>spectacles</a>
+                                        {{-- <a href="{{ route('spectacles') }}" class="btn btn-info"><i
+                                                class="fa-solid fa-masks-theater mx-2"></i>spectacles</a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -153,49 +148,12 @@
                     <img src="{{ asset('img/elements/smiley.png') }}" class="card-img-top" alt="panier vide">
                     <div class="card-body">
                         <h2 class="card-title text-center">Panier vide!</h2>
-                        <a href="{{ route('spectacles') }}" class="btn btn-primary btn-block">Reservez vos spectacles</a>
+                        <a href="{{ route('spectacles') }}" class="btn btn-info btn-block"><i
+                                class="fa-solid fa-masks-theater mx-2"></i>Nos spectacles</a>
                     </div>
                 </div>
             </div>
     @endif
-
-    {{-- <div class="single-product-slider">
-        <h4 class="text-center mt-3">Spectacle(s) sauvegardé(s)</h4>
-        <div class="container mt-4">
-            @if (Cart::instance('save')->count() > 0)
-                <div class="row">
-                    @foreach (Cart::instance('save')->content() as $show)
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-product">
-                                <img src="{{ Voyager::image($show->model->poster_url) }}" alt="produit sauvegardé"
-                                    class="img-fluid">
-                                <div class="product-details">
-                                    <h6>{{ $show->model->title }}</h6>
-                                    <div class="price">
-                                        <h6>{{ $show->model->price }} &euro;</h6>
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <form action="{{ route('save.destroy', $show->rowId) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger mx-2"><i
-                                                    class="fa fa-trash mx-2"></i>Effacer</button>
-                                        </form>
-                                        <form action="{{ route('save.store', $show->rowId) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-warning"><i
-                                                    class="fa-solid fa-cart-shopping mx-2"></i>Panier</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @else
-            @endif
-        </div> --}}
-    {{-- </div> --}}
 
     <!--================End Cart Area =================-->
 @endsection
