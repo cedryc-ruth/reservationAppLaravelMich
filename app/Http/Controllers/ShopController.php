@@ -18,13 +18,10 @@ class ShopController extends Controller
     public function index()
     {
         $today = new DateTime(now());
-        // dd($today->format('Y-m-d H:i:s'));
-        // $representations = Representation::where('when','>=', $today->format('Y-m-d H:i:s'))->get();
-        // dd($representations);
-        // $shows = Show::with('representations')->paginate(3);
-
-        $shows = Show::join('representations','show_id','=','shows.id')
-                 ->where('when','>=', $today->format('Y-m-d H:i:s'))->distinct()->orderBy('when','asc')->paginate(3,['shows.*']);
+        $shows = Show::join('representations', 'show_id', '=', 'shows.id')
+                 ->where('when', '>=', $today->format('Y-m-d H:i:s'))
+                 ->distinct()->orderBy('when', 'asc')
+                 ->paginate(3, ['shows.*']);
         return view('spectacle', compact('shows'));
     }
 
@@ -58,51 +55,41 @@ class ShopController extends Controller
     public function show($slug)
     {
         $show = Show::where('slug', $slug)->firstOrFail();
-        $representation = Representation::where('show_id',$show->id)->firstOrFail();
-        // dd($representation);
-        return view('product', compact('show','representation'));
+        $representation = Representation::where('show_id', $show->id)->firstOrFail();
+        return view('product', compact('show', 'representation'));
     }
 
     public function showById($id)
     {
         $show = Show::where('id', $id)->firstOrFail();
         $representation = Representation::where('show_id', $show->id)->firstOrFail();
-
-        return view('product', compact('show','representation'));
+        return view('product', compact('show', 'representation'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function search(Request $request)
     {
-        //
-    }
+       
+        //Requête eloquent de Recherche des produits
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $request->validate([
+            'search' => 'required|min:2'
+        ],[
+            'search.required' => 'Veuillez saisir un mot pour effectuer la recherche',
+            'search.min' =>'Le mot à recherche dans les titres des spectacles doit comporter au moins 2 caractères'
+        ]);
+
+        $q = request()->input('search');
+
+        $today = new DateTime(now());
+        $shows = Show::join('representations', 'show_id', '=', 'shows.id')
+                 ->where('when', '>=', $today->format('Y-m-d H:i:s'))
+                 ->where('title', 'like', "%$q%")
+                //  ->orWhere('description', 'like', "%$q%")
+                 ->distinct()->orderBy('when', 'asc')
+                 ->paginate(3, ['shows.*']);
+
+        return view('search', compact('shows'));
     }
 
     public function contact()

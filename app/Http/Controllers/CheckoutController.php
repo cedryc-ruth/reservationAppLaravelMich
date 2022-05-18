@@ -36,7 +36,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
         $authed_user = auth()->user();
         $amount = Cart::total();
         $amount *= 100;

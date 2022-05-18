@@ -20,7 +20,7 @@
     <!-- start product Area -->
     <section class="owl-carousel active-product-area section_gap">
         <!-- single product slide -->
-        <div class="single-product-slider my-5">
+        <div class="single-product-slider">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
@@ -34,25 +34,13 @@
                     <div class="col-lg-3">
                         <form action="{{ route('shop.search') }}" class="d-flex mr-3 align-items-center" method="GET">
                             <div class="form-group mb-0">
-                                <input type="text" class="form-control" name="search" placeholder="Recherche ...">
+                                <input type="text" class="form-control" name="search" value="{{ request()->search ?? '' }}">
                             </div>
-                            <button type="submit" class="btn btn-info mx-1"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="submit" class="btn btn-info mx-1"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
                 </div>
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul class="mb-2 mt-2">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+
                 <div class="row">
                     @foreach ($shows as $show)
                         <div class="col-md-4">
@@ -135,8 +123,4 @@
         </div>
     </section>
     <!-- end product Area -->
-@endsection
-
-@section('search-js')
-    <script></script>
 @endsection

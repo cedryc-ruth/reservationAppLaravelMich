@@ -51,7 +51,7 @@
                             <input type="hidden" name="show_id" value="{{ $show->id }}">
                             <div class="form-group mb-5">
                                 <label for="representation_id" class="form-label">
-                                    <h6 class=""><i class="fa-solid fa-calendar-days mx-1"></i>Choisir une
+                                    <h6 class=""><i class="fa-solid fa-calendar-days mx-1"></i>Choisissez une
                                         date de
                                         représentation: </h6>
                                 </label>
@@ -61,6 +61,17 @@
                                             {{ $representation->when->format('d-m-Y à H:i:s') }}
                                         </option>
                                     @endforeach
+                                </select>
+                            
+                            </div>
+                            <div class="form-group mb-5">
+                                <label for="qty" class="form-label">
+                                    <h6 class=""><i class="fa-solid fa-calendar-days mx-1"></i>Choisir le nombre de places à réserver </h6>
+                                </label>
+                                <select name="qty" id="qty" class="form-select mb-3">
+                                    @for ($i = 1; $i <= 6; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary"><i

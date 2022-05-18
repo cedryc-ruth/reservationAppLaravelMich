@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Representation;
 use App\Models\Show;
 use Illuminate\Http\Request;
+use App\Models\Representation;
 use Database\Seeders\ShowSeeder;
+use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
@@ -51,10 +52,12 @@ class CartController extends Controller
         //     return redirect()->route('cart.index')->with('danger', 'Le spectacle a déjà été ajouté à votre panier');
         // }
 
+        // dd($request);
+
         $show = Show::findOrFail($request->show_id);
-        $cart = Cart::add($show->id, $show->title, 1, $show->price)->associate('App\Models\Show');
-        
-        // dd($cart);
+
+       
+        Cart::add($show->id, $show->title, $request->qty, $show->price)->associate('App\Models\Show');
 
         return redirect()->route('cart.index')->with('success', 'Le spectacles a été bien ajouté à votre panier');
     }

@@ -50,7 +50,7 @@
                                                 <div class="p-2 px-3 text-uppercase">Spectacle(s) </div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Prix</div>
+                                                <div class="py-2 text-uppercase">Prix <span class="text-lowercase">(sous-total)</span></div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
                                                 <div class="py-2 text-uppercase">Reservation(s)</div>
@@ -64,7 +64,7 @@
                                         @foreach (Cart::content() as $show)
                                             <tr>
                                                 <th scope="row" class="border-0">
-                                                    <div class="p-2">
+                                                    <div class="p-1">
                                                         <a href="{{ route('shop.showById', $show->id) }}"><img
                                                                 src="{{ Voyager::image($show->model->poster_url) }}"
                                                                 alt="image spectacle" width="70"
@@ -88,10 +88,16 @@
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <td class="border-0 align-middle">
-                                                    <strong> {{ $show->price }} &euro;</strong>
+                                                <td class="border-0 align-top">
+                                                    <strong> {{ $show->subtotal()}} &euro;</strong>
                                                 </td>
-                                                <td class="border-0 align-middle"><strong>1</strong></td>
+                                                <td class="border-0 align-top">
+                                                    <div class="product_count">
+                                                        <input disabled type="text" name="qty" id="qty" maxlength="12"
+                                                            value="x {{ $show->qty }}" title="Quantity:"
+                                                            class="input-text">
+                                                    </div>
+                                                </td>
                                                 <td class="border-0 align-middle d-flex">
                                                     <form action="{{ route('cart.destroy', $show->rowId) }}"
                                                         method="POST">

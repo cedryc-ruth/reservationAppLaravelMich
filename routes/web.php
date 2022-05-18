@@ -37,6 +37,7 @@ Route::get('/', [ShopController::class,'index'])->name('spectacles');
 Route::get('/shop/{show}', [ShopController::class,'show'])->name('shop.show');
 Route::get('/shop/{show}/byId', [ShopController::class,'showById'])->name('shop.showById');
 Route::get('/contact', [ShopController::class,'contact'])->name('contact');
+Route::get('/search',[ShopController::class,'search'])->name('shop.search');
 
 
 // Cart page

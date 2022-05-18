@@ -87,9 +87,9 @@
                          <li class="nav-item">
                              <a class="nav-link" href="{{ route('cart.index') }}">
                                  <i class="fas fa-shopping-cart"></i> Panier
-                                 @if (Cart::instance('default')->count() > 0)
+                                 @if (Cart::count() > 0)
                                      <span
-                                         class="badge badge-pill badge-primary p-2">{{ Cart::instance('default')->count() }}</span>
+                                         class="badge badge-pill badge-primary p-1">{{ Cart::count() }}</span>
                                  @endif
                              </a>
                          </li>
