@@ -61,11 +61,10 @@
                         <div class="order_box">
                             <h2>Votre commande</h2>
                             <ul class="list">
-                                <li><a href="{{ route('spectacles') }}">Spectacle(s) <span>Total</span></a></li>
-                                @foreach (Cart::content() as $show)
-                                    <li><a href="#">{{ $show->model->title }} <span class="middle">x
-                                                {{ $show->qty }}</span> <span
-                                                class="last">{{ $show->model->price }}</span></a></li>
+                                <li><a href="{{ route('spectacles') }}">Spectacle(s) <span>Sous-Total</span></a></li>
+                                @foreach (Cart::content() as $representation)
+                                    <li><a href="#">{{ $representation->model->show->title }}({{ $representation->model->show->price }}&euro;x{{ $representation->qty }})  <span
+                                                class="last">{{ $representation->subtotal() }}&euro;</span></a></li>
                                 @endforeach
 
                             </ul>

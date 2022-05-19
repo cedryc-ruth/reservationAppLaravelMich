@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RepresentationUser;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -36,20 +37,17 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $authed_user = auth()->user();
-        $amount = Cart::total();
-        $amount *= 100;
+        $amount = Cart::total() * 100;
+
+        
         $payment = $request->payment_method;
 
-        if (!$payment) 
-        {
+        if (!$payment) {
             return redirect()->route('checkout.index')->with('danger', 'Informations incorrectes. Impossible d\'effecter le paiement!');
-        }
-        else 
-        {
-            try 
-            {
+        } else {
+            try {
                 $charge = $authed_user->charge(
                     $amount,
                     $request->payment_method,
@@ -64,9 +62,7 @@ class CheckoutController extends Controller
                 );
                 
                 return redirect()->route('checkout.success')->with('success', 'Le paiement a été accepté ');
-            } 
-            catch (Exception $e) 
-            {
+            } catch (Exception $e) {
                 throw $e;
             }
         }
@@ -74,11 +70,22 @@ class CheckoutController extends Controller
 
     public function success()
     {
-        if (!session()->has('success')) 
-        {
+        if (!session()->has('success')) {
             return redirect()->route('spectacles');
         }
 
+       
+        
+        if (Cart::count() > 0) {
+            foreach (Cart::content() as $cart) {
+                RepresentationUser::create([
+                    'representation_id' => $cart->id,
+                    'user_id' => auth()->user()->id,
+                    'places' => $cart->qty
+                ]);
+            }
+        }
+      
         Cart::destroy();
         return view('checkout.success');
     }

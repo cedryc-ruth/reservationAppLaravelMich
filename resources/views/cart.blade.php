@@ -47,7 +47,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="p-2 px-3 text-uppercase">Spectacle(s) </div>
+                                                <div class="p-2 px-3 text-uppercase">Representation(s) </div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
                                                 <div class="py-2 text-uppercase">Prix <span class="text-lowercase">(sous-total)</span></div>
@@ -61,45 +61,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (Cart::content() as $show)
+                                        @foreach (Cart::content() as $representation)
                                             <tr>
                                                 <th scope="row" class="border-0">
                                                     <div class="p-1">
-                                                        <a href="{{ route('shop.showById', $show->id) }}"><img
-                                                                src="{{ Voyager::image($show->model->poster_url) }}"
+                                                        <a href="{{ route('shop.showById', $representation->model->show->id) }}"><img
+                                                                src="{{ Voyager::image($representation->model->show->poster_url) }}"
                                                                 alt="image spectacle" width="70"
                                                                 class="img-fluid rounded shadow-sm"></a>
                                                         <div class="ml-3 d-inline-block align-middle">
-                                                            {{-- <h5 class="mb-0">
-                                                                <select class="form-select" name="language_id"
-                                                                    id="language_id">
-                                                                    <option selected>Choisissez une date</option>
-                                                                    @foreach ($shows as $showItem)
-                                                                        @if ($showItem->id == $show->model->id)
-                                                                            @foreach ($showItem->representations as $dateShow)
-                                                                                <option value="">
-                                                                                    {{ $dateShow->when->format('d-m-Y à H:i:s') }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        @endif
-                                                                    @endforeach
-                                                                </select>
-                                                            </h5> --}}
+                                                            <h6>({{$representation->model->show->title }}) | {{ $representation->model->when->format('d-m-Y à H:m') }}</h6>
                                                         </div>
                                                     </div>
                                                 </th>
                                                 <td class="border-0 align-top">
-                                                    <strong> {{ $show->subtotal()}} &euro;</strong>
+                                                    <strong> {{ $representation->subtotal()}} &euro;</strong>
                                                 </td>
                                                 <td class="border-0 align-top">
                                                     <div class="product_count">
                                                         <input disabled type="text" name="qty" id="qty" maxlength="12"
-                                                            value="x {{ $show->qty }}" title="Quantity:"
+                                                            value="x {{ $representation->qty }}" title="Quantity:"
                                                             class="input-text">
                                                     </div>
                                                 </td>
                                                 <td class="border-0 align-middle d-flex">
-                                                    <form action="{{ route('cart.destroy', $show->rowId) }}"
+                                                    <form action="{{ route('cart.destroy', $representation->rowId) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
