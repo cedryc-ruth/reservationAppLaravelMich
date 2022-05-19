@@ -29,7 +29,12 @@ use App\Http\Controllers\SaveCartController;
 
 // Main page
 
-Route::get('/home',[HomeController::class,'index'])->name('home');
+Route::get('/home', [HomeController::class,'index'])->name('home');
+
+// Orders
+
+Route::get('/orders', [HomeController::class,'orders'])->name('orders');
+
 
 //Shop
 
@@ -37,27 +42,22 @@ Route::get('/', [ShopController::class,'index'])->name('spectacles');
 Route::get('/shop/{show}', [ShopController::class,'show'])->name('shop.show');
 Route::get('/shop/{show}/byId', [ShopController::class,'showById'])->name('shop.showById');
 Route::get('/contact', [ShopController::class,'contact'])->name('contact');
-Route::get('/search',[ShopController::class,'search'])->name('shop.search');
+Route::get('/search', [ShopController::class,'search'])->name('shop.search');
 
 
 // Cart page
 
 Route::get('/cart', [CartController::class,'index'])->name('cart.index');
-Route::post('/cart/store',[CartController::class,'store'])->name('cart.store');
+Route::post('/cart/store', [CartController::class,'store'])->name('cart.store');
 Route::get('/reset', [CartController::class,'reset'])->name('cart.reset');
-Route::delete('/cart/{show}/destroy',[CartController::class,'destroy'])->name('cart.destroy');
+Route::delete('/cart/{show}/destroy', [CartController::class,'destroy'])->name('cart.destroy');
 
 
 // Checkout
 
 Route::get('/checkout', [CheckoutController::class,'index'])->name('checkout.index');
-Route::post('/checkout/store',[CheckoutController::class,'store'])->name('checkout.store');
+Route::post('/checkout/store', [CheckoutController::class,'store'])->name('checkout.store');
 Route::get('/checkout/success', [CheckoutController::class,'success'])->name('checkout.success');
-
-// Orders
-
-Route::get('/orders', [MainController::class,'orders'])->name('orders');
-
 
 
 Route::group(['prefix' => 'admin'], function () {
@@ -69,21 +69,20 @@ Route::group(['prefix' => 'admin'], function () {
 
 Auth::routes(['verify' => true]);
 
+
+// Register
+
 Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('register');
-Route::post('/register',[RegisterController::class,'register']);
+Route::post('/register', [RegisterController::class,'register']);
 
 // Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
 // Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
+
+
+// Change password
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/changePassword', [HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
     Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
     Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
 });
-
-
-
-
-
-
-

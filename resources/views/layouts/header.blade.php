@@ -69,7 +69,7 @@
 
                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                      <a class="dropdown-item" href="{{ route('home') }}">Mon compte</a>
-                                     <a class="dropdown-item" href="#">Mes achats</a>
+                                     <a class="dropdown-item" href="{{ route('orders') }}">Mes achats</a>
                                      <div class="dropdown-divider"></div>
                                      <a class="dropdown-item" href="{{ route('logout') }}"
                                          onclick="event.preventDefault();

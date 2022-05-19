@@ -26,7 +26,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index() // Affichage de l'index de la page home du client authentifié
     {
         $languages = Language::all();
         $user = auth()->user();
@@ -41,29 +41,43 @@ class HomeController extends Controller
         $user->email =$request->email;
     }
 
-    public function changePasswordPost(Request $request)
+    public function changePasswordPost(Request $request)  // fonction pour changer le mot de passe 
     {
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            // The passwords matches
-            return redirect()->back()->with("error", "Your current password does not matches with the password.");
+            // Si les deux mots de passe se ressemblent
+            return redirect()->back()->with("error", "Le mot de passe saisi ne correspond pas à votre de passe actuel");
         }
 
         if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
-            // Current password and new password same
-            return redirect()->back()->with("error", "New Password cannot be same as your current password.");
+            // Si le nouveau mot de passe ressemblent à l'ancien mot de passe
+            return redirect()->back()->with("error", "Le nouveau mot de passe ne peut pas être le même que votre mot de passe actuel");
         }
 
         $validatedData = $request->validate([
             'current-password' => 'required',
             'new-password' => 'required|string|min:8|confirmed',
+        ],[
+            'current-password.required' => 'Veuillez saisir votre mot de passe actuel.',
+            'new-password.required' => 'Veuillez saisir votre nouveau mot de passe.',
+            'new-password.string' => 'Votre nouveau mot de passe doit être composé par des caractères alphanumériques.',
+            'new-password.min' => 'Votre nouveau mot de passe doit être composé de 8 caractères au minimum.',
+            'new-password.confirmed' => 'Veuillez confirmer votre mot de passe.'
         ]);
 
-        //Change Password
+        // Changement du mot de passe
+
         $user = Auth::user();
         $user->password = Hash::make($request->get('new-password'));
         $user->save();
 
         return redirect()->back()->with("success", "Password successfully changed!");
+    }
+
+    public function orders()   // Afficher des l'historique des commandes liées à l'utilisateur courant (authentifié)
+    {
+        $user = auth()->user();  // Récupération de l'utilisateur authentifié
+        $orders = $user->orders;
+        return view('orders',compact('orders'));
     }
 }

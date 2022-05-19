@@ -18,47 +18,41 @@
 
     <div class="container my-5">
         <div class="orders">
-            <h2 class="text-center">Orders Details</h2>
-            <div class="table-responsive order_details_table">
-                <div class="d-flex justify-content-between my-5 px-5">
-                    <h4>
-                        <i class="fas fa-receipt"></i>
-                        order #4825
-                    </h4>
-                    <h4>Date: 22/12/2020</h4>
+            <h2 class="text-center">Historique de vos commandes</h2>
+            @foreach ($orders as $order)
+                <div class="table-responsive order_details_table">
+                    <div class="d-flex justify-content-between my-5 px-5">
+                        <h4>
+                            <i class="fas fa-receipt"></i>
+                            Commande #{{ $order->id }}
+                        </h4>
+                        <h4>Date: {{ $order->created_at->translatedFormat('d M Y') }}</h4>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col">Spectacle(s)</th>
+                                <th class="col">Places</th>
+                                <th class="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($order->representations as $representation)
+                                <tr>
+                                    <td>{{ $representation->show->title }}</td>
+                                    <td>x {{$representation->pivot->places }}</td>
+                                    <td>{{ round($representation->show->price * $representation->pivot->places,2) }}&euro;</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td></td>
+                                <td>{{ round($order->paiement_total,2) }}&euro;</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="col">Product</th>
-                            <th class="col">Quantity</th>
-                            <th class="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Product name</td>
-                            <td>x 1</td>
-                            <td>$ 6</td>
-                        </tr>
-                        <tr>
-                            <td><b>Subtotal</b></td>
-                            <td></td>
-                            <td>$ 6</td>
-                        </tr>
-                        <tr>
-                            <td><b>Tax</b></td>
-                            <td></td>
-                            <td>$ 0.85</td>
-                        </tr>
-                        <tr>
-                            <td><b>Total</b></td>
-                            <td></td>
-                            <td>$ 6.85</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection

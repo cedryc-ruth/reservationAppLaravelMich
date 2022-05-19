@@ -30,10 +30,41 @@
             <div class="billing_details">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="text-center">Payez avec votre carte</h3>
+                        <h3 class="text-center">Vos informations personnelles</h3>
                         <form action="{{ route('checkout.store') }}" method="POST" id="payment-form">
                             @csrf
-                            <div class="card">
+                            <div class="row">
+                                <div class="col-md-6 form-group p_star">
+                                    <input type="text" class="form-control" id="firstname" name="firstname">
+                                    <span class="placeholder" data-placeholder="Prénom"></span>
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <input type="text" class="form-control" id="lastname" name="lastname">
+                                    <span class="placeholder" data-placeholder="Nom"></span>
+                                </div>
+
+                                <div class="col-md-6 form-group p_star">
+                                    <input type="text" class="form-control" id="number" name="phone">
+                                    <span class="placeholder" data-placeholder="Numéro de téléphone ou de GSM"></span>
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    <input type="text" class="form-control" id="email" name="email">
+                                    <span class="placeholder" data-placeholder="Email"></span>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="add" name="address">
+                                    <span class="placeholder" data-placeholder="Adresse"></span>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="city" name="city">
+                                    <span class="placeholder" data-placeholder="Ville"></span>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="zip" name="postalcode">
+                                    <span class="placeholder" data-placeholder="Code Postal"></span>
+                                </div>
+                            </div>
+                            <div class="card ">
                                 <div class="card-header">
                                     <h6 class="card-title text-center">Saisissez le numéro de votre carte</h6>
                                 </div>
@@ -63,8 +94,10 @@
                             <ul class="list">
                                 <li><a href="{{ route('spectacles') }}">Spectacle(s) <span>Sous-Total</span></a></li>
                                 @foreach (Cart::content() as $representation)
-                                    <li><a href="#">{{ $representation->model->show->title }}({{ $representation->model->show->price }}&euro;x{{ $representation->qty }})  <span
-                                                class="last">{{ $representation->subtotal() }}&euro;</span></a></li>
+                                    <li><a href="#">{{ $representation->model->show->title }}({{ $representation->model->show->price }}&euro;x{{ $representation->qty }})
+                                            <span
+                                                class="last">{{ $representation->subtotal() }}&euro;</span></a>
+                                    </li>
                                 @endforeach
 
                             </ul>
@@ -96,6 +129,8 @@
     </section>
     <!--================End Checkout Area =================-->
 @endsection
+
+
 
 @section('extra-js')
     <script src="https://js.stripe.com/v3/"></script>
