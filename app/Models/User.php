@@ -19,7 +19,6 @@ class User extends VoyagerUser implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, Authenticatable,Billable;
 
-    // public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -53,7 +52,7 @@ class User extends VoyagerUser implements MustVerifyEmail
 
     public function representations()
     {
-        return $this->belongsToMany(Representation::class, 'representation_users', 'user_id', 'representation_id'); 
+        return $this->belongsToMany(Representation::class, 'representation_users', 'user_id', 'representation_id')->withPivot('places'); 
     }
     public function language()
     {

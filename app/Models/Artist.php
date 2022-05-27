@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Artist extends Model
 {
@@ -11,10 +12,11 @@ class Artist extends Model
 
     public $timestamps = false;
     protected $guarded = [];
+    protected $table = 'artists';
     
 
     public function types()
     {
-        return $this->belongsToMany(Type::class,'artist_types','artist_id','type_id');  // Un artiste peut-être de plusieurs types
+        return $this->belongsToMany(Type::class);  // Un artiste peut-être de plusieurs types
     }
 }

@@ -8,7 +8,7 @@
                 <div class="col-first">
                     <h1>Login</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{{ route('spectacles') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
                         <a href="{{ route('login') }}">Se connecter</a>
                     </nav>
                 </div>

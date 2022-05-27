@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth','verified']);  // POur que l'utilisateur ait accès à son espace personnel, il faut qu'il soit authentifié et son email vérifié
     }
 
     /**
@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         $languages = Language::all();
         $user = auth()->user();
-        return view('home', compact('user', 'languages'));
+        return view('home.index', compact('user', 'languages'));
     }
 
     public function updateUserInfo(UserRequest $request, User $user)
@@ -54,7 +54,9 @@ class HomeController extends Controller
             return redirect()->back()->with("error", "Le nouveau mot de passe ne peut pas être le même que votre mot de passe actuel");
         }
 
-        $validatedData = $request->validate([
+        // On vérifie si les données saisies respectées les règles définies
+
+        $request->validate([
             'current-password' => 'required',
             'new-password' => 'required|string|min:8|confirmed',
         ],[
@@ -67,17 +69,17 @@ class HomeController extends Controller
 
         // Changement du mot de passe
 
-        $user = Auth::user();
-        $user->password = Hash::make($request->get('new-password'));
-        $user->save();
+        $user = Auth::user();  // On récupère le user connecté
+        $user->password = Hash::make($request->get('new-password')); // On remplace son mot de passé
+        $user->save(); // On sauvegarde le user
 
-        return redirect()->back()->with("success", "Password successfully changed!");
+        return redirect()->back()->with("success", "Votre mot de passe a éé changé avec succès!");  // On envoi
     }
 
     public function orders()   // Afficher des l'historique des commandes liées à l'utilisateur courant (authentifié)
     {
         $user = auth()->user();  // Récupération de l'utilisateur authentifié
-        $orders = $user->orders;
-        return view('orders',compact('orders'));
+        $orders = $user->orders;  // On récupère les commandes associées à ce user.
+        return view('home.orders',compact('orders'));
     }
 }

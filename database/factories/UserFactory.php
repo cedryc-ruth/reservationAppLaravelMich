@@ -20,9 +20,14 @@ class UserFactory extends Factory
     public function definition()
     {
         $languages = Language::pluck('id');
+        $firstname = $this->faker->firstName();
+        $lastname = $this->faker->lastName();
 
         return [
-            'name' => $this->faker->name(),
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'login' => 'My Login',
+            'name' => $firstname.' '.$lastname,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('habaligani'),

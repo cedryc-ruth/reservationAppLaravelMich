@@ -21,9 +21,9 @@ return new class extends Migration {
             $table->string('poster_url',255)->nullable();
             $table->text('images')->nullable();
             $table->tinyInteger('bookable')->default('1');
-            $table->decimal('price', '10', '2', true);
+            $table->decimal('price', '10', '2', true)->nullable();
             $table->text('description');
-            $table->foreignIdFor(Location::class)->constrained();
+            $table->foreignId('location_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
             // $table->timestamps();
         });
     }

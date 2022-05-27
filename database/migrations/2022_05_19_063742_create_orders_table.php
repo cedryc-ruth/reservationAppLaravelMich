@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('paiement_city');
             $table->string('paiement_postalcode');
             $table->string('discount')->nullable();
+            $table->string('paiement_tax');
             $table->string('paiement_total');
             $table->timestamps();
         });

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Show;
+use App\Models\Locality;
 use App\Models\Representation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +14,16 @@ class Location extends Model
 
     public $timestamps = false;
     protected $guarded = [];
+    protected $table = 'locations';
+
+
+    // Pour afficher nommement des localités dans Voyager TCG
+
+    public function localityId()
+    {
+        return $this->belongsToMany(Locality::class);
+    }
+
 
     public function shows()
     {

@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style-card.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/artist-card.css') }}">
 </head>
 
 <body>

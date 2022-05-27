@@ -26,6 +26,7 @@ class LocationFactory extends Factory
             'address' => $this->faker->address(),
             'website' => $this->faker->domainName(),
             'phone' => $this->faker->phoneNumber(),
+            'image'=>'https://picsum.photos/200/250',
             'locality_id' => $this->faker->randomElement($localities),
             
         ];

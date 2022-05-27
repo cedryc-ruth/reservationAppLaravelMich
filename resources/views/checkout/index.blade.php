@@ -7,8 +7,8 @@
                 <div class="col-first">
                     <h1>Checkout</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="single-product.html">Checkout</a>
+                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('checkout.index') }}">Checkout</a>
                     </nav>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                         <div class="order_box">
                             <h2>Votre commande</h2>
                             <ul class="list">
-                                <li><a href="{{ route('spectacles') }}">Spectacle(s) <span>Sous-Total</span></a></li>
+                                <li><a href="#">Spectacle(s) <span>Sous-Total</span></a></li>
                                 @foreach (Cart::content() as $representation)
                                     <li><a href="#">{{ $representation->model->show->title }}({{ $representation->model->show->price }}&euro;x{{ $representation->qty }})
                                             <span

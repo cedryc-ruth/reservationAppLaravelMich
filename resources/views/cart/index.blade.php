@@ -7,7 +7,7 @@
                 <div class="col-first">
                     <h1>Votre Panier</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{{ route('spectacles') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
                         <a href="{{ route('cart.index') }}">Cart</a>
                     </nav>
                 </div>
@@ -65,7 +65,7 @@
                                             <tr>
                                                 <th scope="row" class="border-0">
                                                     <div class="p-1">
-                                                        <a href="{{ route('shop.showById', $representation->model->show->id) }}"><img
+                                                        <a href="{{ route('show.show', $representation->model->show->slug) }}"><img
                                                                 src="{{ Voyager::image($representation->model->show->poster_url) }}"
                                                                 alt="image spectacle" width="70"
                                                                 class="img-fluid rounded shadow-sm"></a>
@@ -140,7 +140,7 @@
                     <img src="{{ asset('img/elements/smiley.png') }}" class="card-img-top" alt="panier vide">
                     <div class="card-body">
                         <h2 class="card-title text-center">Panier vide!</h2>
-                        <a href="{{ route('spectacles') }}" class="btn btn-info btn-block"><i
+                        <a href="{{ route('show.index') }}" class="btn btn-info btn-block"><i
                                 class="fa-solid fa-masks-theater mx-2"></i>Nos spectacles</a>
                     </div>
                 </div>

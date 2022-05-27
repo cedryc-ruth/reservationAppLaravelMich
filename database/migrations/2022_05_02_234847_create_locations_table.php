@@ -20,7 +20,8 @@ return new class extends Migration {
             $table->string('address', 255);
             $table->string('website', 255);
             $table->string('phone', 30);
-            $table->foreignIdFor(Locality::class)->constrained();
+            $table->string('image')->nullable();
+            $table->foreignId('locality_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
 
             // $table->timestamps();
         });

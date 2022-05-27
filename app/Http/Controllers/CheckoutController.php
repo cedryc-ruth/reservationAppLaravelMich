@@ -13,7 +13,7 @@ class CheckoutController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth');  // On applique le middleware à toutes les routes faisant appel aux methodes de CheckoutController
     }
 
     /**
@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         $payment = $request->payment_method;
 
         if (!$payment) {
-            return redirect()->route('checkout.index')->with('danger', 'Informations incorrectes. Impossible d\'effecter le paiement!');
+            return redirect()->route('checkout.index')->with('danger', 'Informations incorrectes. Impossible d\'effectuer le paiement!');
         } else {
             try {
                 $authed_user->charge(

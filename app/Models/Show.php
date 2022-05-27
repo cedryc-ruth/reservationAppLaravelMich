@@ -13,6 +13,8 @@ class Show extends Model
 
     public $timestamps = false;
     protected $guarded = [];
+    protected $table = 'shows';
+
 
     // Voyager relationship
 
@@ -28,10 +30,13 @@ class Show extends Model
         return $this->belongsTo(Location::class);  // Un "show" se déroule dans une et une seule location
     }
     
-    
-    public function artist_types()
+    /**
+     * Get the performances (artists in a type of collaboration) for the show
+     */
+
+    public function artistTypes()
     {
-        return $this->belongsToMany(ArtistType::class, 'artist_type_show', 'show_id', 'artist_types_id');
+        return $this->belongsToMany(ArtistType::class);
     }
 
     public function representations()

@@ -18,8 +18,8 @@ return new class extends Migration
         Schema::create('representations', function (Blueprint $table) {
             $table->id();
             $table->dateTime('when');
-            $table->foreignIdFor(Show::class)->constrained();
-            $table->foreignIdFor(Location::class)->constrained();
+            $table->foreignId('show_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreignId('location_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

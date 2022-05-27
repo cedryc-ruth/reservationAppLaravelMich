@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderRepresentation extends Model
+class ArtistTypeShow extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-    public $timestamps = false;
-    protected $table = 'order_representations';
 
+    public $timestamps = false;
+    protected $guarded = [];
+    protected $table = 'artist_type_show';
 }

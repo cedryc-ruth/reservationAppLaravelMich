@@ -14,6 +14,7 @@ class Representation extends Model
     public $timestamps = false;
     protected $guarded = [];
     protected $dates = ['when'];
+    protected $table = 'representations';
 
     public function show()
     {

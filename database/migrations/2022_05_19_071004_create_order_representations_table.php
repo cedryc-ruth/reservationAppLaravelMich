@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('order_representations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('representation_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignId('order_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('representation_id')->nullable()->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('order_id')->nullable()->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->integer('places')->unsigned();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

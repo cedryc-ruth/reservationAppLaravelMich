@@ -7,8 +7,8 @@
                 <div class="col-first">
                     <h1>Home Page</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{{ route('spectacles') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('home') }}">Home Page</a>
+                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('home.index') }}">Home Page</a>
                     </nav>
                 </div>
             </div>

@@ -11,10 +11,17 @@ use App\Models\ArtistType;
 use Illuminate\Support\Str;
 use App\Models\Representation;
 use Illuminate\Database\Seeder;
+use Database\Seeders\ShowSeeder;
+use Database\Seeders\TypeSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\ArtistSeeder;
 use Database\Seeders\LanguageSeeder;
+use Database\Seeders\LocalitySeeder;
+use Database\Seeders\LocationSeeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\RepresentationSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 
 class DatabaseSeeder extends Seeder
@@ -39,8 +46,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ShowSeeder::class);
 
         foreach (Show::all() as $show) {
-            $artist_types = ArtistType::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $show->artist_types()->attach($artist_types);
+            $artist_types = ArtistType::inRandomOrder()->take(rand(3, 5))->pluck('id');
+            $show->artistTypes()->attach($artist_types);
         }
 
         $this->call(RepresentationSeeder::class);
@@ -54,12 +61,15 @@ class DatabaseSeeder extends Seeder
         }
 
         User::create([
+            'firstname' => 'Michaël',
+            'lastname' => 'Bat.',
+            'login' => 'michbat',
             'name' => 'Michaël Bat.',
             'email' => 'michael.batn@outlook.com',
             'email_verified_at' => now(),
             'password' => Hash::make('habaligani'),
             'remember_token' => Str::random(10),
-            'role_id'=>null,
+            'role_id'=>1,
             'language_id' => 1,
         ]);
     }

@@ -15,7 +15,18 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['acteur','actrice','chanteur','chanteuse','instrumentaliste','metteur en scène'];
+        $types = [
+            'auteur(e)',
+            'chanteur',
+            'chanteuse',
+            'scénographe',
+            'comédien',
+            'comédienne',
+            'producteur',
+            'productrice',
+            'régisseur',
+            'régisseuse',
+        ];
 
         foreach ($types as $type) {
             Type::create(['type' => $type]);

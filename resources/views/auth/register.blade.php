@@ -10,7 +10,7 @@
                 <div class="col-first">
                     <h1>Enregistrement</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{{ route('spectacles') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
                         <a href="{{ route('register') }}">Enregistrement</a>
                     </nav>
                 </div>
@@ -27,8 +27,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="login_box_img">
-                        <img class="img-fluid" src="{{ asset('img/login.jpg') }}" alt="">
+                    <div class="login_box_img h-100">
+                        <img class="img-fluid h-100" src="{{ asset('img/login.jpg') }}" alt="">
                         <div class="hover">
                             <h4>Déjà un compte?</h4>
                             <a class="primary-btn" href="{{ route('login') }}">Login</a>
@@ -42,9 +42,31 @@
                             novalidate="novalidate" method="POST">
                             @csrf
                             <div class="col-md-12 form-group">
-                                <input type="name" class="form-control @error('name') is-invalid @enderror" id="name"
-                                    name="name" placeholder="Votre nom & prénom" value="{{ old('name') }}">
-                                @error('name')
+                                <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname"
+                                    name="firstname" placeholder="Votre prénom" value="{{ old('firstname') }}">
+                                @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname"
+                                    name="lastname" placeholder="Votre nom" value="{{ old('lastname') }}">
+                                @error('lastname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            
+                            <input type="hidden" class="form-control" name="name">
+                          
+
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control @error('login') is-invalid @enderror" id="login"
+                                    name="login" placeholder="Votre login" value="{{ old('login') }}">
+                                @error('login')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -53,7 +75,7 @@
 
                             <div class="col-md-12 form-group">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                                    name="email" placeholder="Votre e-mail" value="{{ old('email') }}">
+                                    name="email" placeholder="Votre adresse email" value="{{ old('email') }}">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -77,9 +99,9 @@
                                     autocomplete="new-password">
                             </div>
 
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-12 form-group mt-2">
                                 <select class="form-select" name="language_id" id="language_id">
-                                    <option selected>Choisisser votre langue</option>
+                                    <option selected value="null">Choisissez votre langue</option>
                                     @foreach ($languages as $language)
                                         <option value="{{ $language->id }}">{{ $language->language }}</option>
                                     @endforeach

@@ -1,9 +1,14 @@
 .card-body{
-    box-shadow: 0 0 20px 7px rgba(0,0,0,0.1)
+    background-color: #fdfdfb;
+}
+.card-footer{
+    background-color: #fdfdfb;
 }
 
 .card{
     margin: 20px 10px;
+    box-shadow: 0 0 20px 7px rgba(0,0,0,0.1);
+
 }
 
 .card-body a{
@@ -19,4 +24,8 @@
     color: #63a6b0;
     text-decoration: none;
 
+}
+
+.txt-deco{
+    text-decoration: line-through;
 }

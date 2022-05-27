@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SaveCartController;
+use App\Http\Controllers\ShowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,33 +25,28 @@ use App\Http\Controllers\SaveCartController;
 |
 */
 
-//Home
+// Home
 
-
-
-// Main page
-
-Route::get('/home', [HomeController::class,'index'])->name('home');
+Route::get('/home', [HomeController::class,'index'])->name('home.index');
 
 // Orders
 
-Route::get('/orders', [HomeController::class,'orders'])->name('orders');
+Route::get('/orders', [HomeController::class,'orders'])->name('home.orders');
 
+// Show
 
-//Shop
+Route::get('/',[ShowController::class,'index'])->name('show.index');
+Route::get('/next-shows',[ShowController::class,'nextIndex'])->name('show.nextindex');
+Route::get('/show/{show}',[ShowController::class,'show'])->name('show.show');
+Route::get('/search', [ShowController::class,'search'])->name('show.search');
+Route::get('/contact', [ShowController::class,'contact'])->name('show.contact');
 
-Route::get('/', [ShopController::class,'index'])->name('spectacles');
-Route::get('/shop/{show}', [ShopController::class,'show'])->name('shop.show');
-Route::get('/shop/{show}/byId', [ShopController::class,'showById'])->name('shop.showById');
-Route::get('/contact', [ShopController::class,'contact'])->name('contact');
-Route::get('/search', [ShopController::class,'search'])->name('shop.search');
 
 
 // Cart page
 
 Route::get('/cart', [CartController::class,'index'])->name('cart.index');
 Route::post('/cart/store', [CartController::class,'store'])->name('cart.store');
-Route::get('/reset', [CartController::class,'reset'])->name('cart.reset');
 Route::delete('/cart/{show}/destroy', [CartController::class,'destroy'])->name('cart.destroy');
 
 
@@ -63,6 +60,12 @@ Route::get('/checkout/success', [CheckoutController::class,'success'])->name('ch
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+
+// Artist
+
+Route::get('/artist',[ArtistController::class,'index'])->name('artist.index');
+Route::get('/artist/{artist}/show',[ArtistController::class,'show'])->name('artist.show');
 
 
 // Authentification

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Locality extends Model
 {
@@ -11,6 +12,7 @@ class Locality extends Model
 
     public $timestamps = false;
     protected $guarded = [];
+    protected $table = 'localities';
 
     public function locations()
     {

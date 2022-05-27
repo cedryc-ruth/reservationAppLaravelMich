@@ -12,6 +12,7 @@ class Language extends Model
 
     public $timestamps = false;
     protected $guarded = [];
+    protected $table = 'languages';
 
     public function users()
     {

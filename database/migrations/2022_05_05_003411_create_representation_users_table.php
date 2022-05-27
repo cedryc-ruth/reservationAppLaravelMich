@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('representation_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Representation::class)->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreignId('representation_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->integer('places');
             // $table->timestamps();
         });

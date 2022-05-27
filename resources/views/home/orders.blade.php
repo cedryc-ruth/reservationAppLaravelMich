@@ -7,15 +7,14 @@
                 <div class="col-first">
                     <h1>Orders</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="single-product.html">Orders</a>
+                        <a href="{{ route('show.index') }}">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{{ route('home.orders') }}">Orders</a>
                     </nav>
                 </div>
             </div>
         </div>
     </section>
     <!-- End Banner Area -->
-
     <div class="container my-5">
         <div class="orders">
             <h2 class="text-center">Historique de vos commandes</h2>
@@ -39,15 +38,20 @@
                         <tbody>
                             @foreach ($order->representations as $representation)
                                 <tr>
-                                    <td>{{ $representation->show->title }}</td>
+                                    <td>{{ $representation->show->title }} {{$representation->show->price }}&euro; (Date: {{ $representation->when->translatedFormat('d M Y') }})</td>
                                     <td>x {{$representation->pivot->places }}</td>
                                     <td>{{ round($representation->show->price * $representation->pivot->places,2) }}&euro;</td>
                                 </tr>
                             @endforeach
                             <tr>
-                                <td><b>Total</b></td>
+                                <td><b>TVA</b></td>
                                 <td></td>
-                                <td>{{ round($order->paiement_total,2) }}&euro;</td>
+                                <td>21 &euro;</td>
+                            </tr>
+                            <tr>
+                                <td><b>TOTAL AVEC TVA</b></td>
+                                <td></td>
+                                <td><strong>{{ round($order->paiement_total,2) }}&euro;</strong></td>
                             </tr>
                         </tbody>
                     </table>

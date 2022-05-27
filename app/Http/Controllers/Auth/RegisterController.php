@@ -72,10 +72,31 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required','string','max:60'],
+            'lastname' => ['required','string','max:60'],
+            'login' => ['required','string','max:30'],
+            // 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'language_id' => ['required']
+        ],[
+            'firstname.required' => 'Veuillez indiquer votre prénom.',
+            'lastname.required' => 'Veuillez indiquer votre nom.',
+            'firstname.string' => 'Votre prénom doit être en caractères alphanumériques(a..z)',
+            'lastname.string' => 'Votre nom doit être en caractères alphanumériques(a..z) ',
+            'firstname.max' => 'Votre prénom doit comporter 60 caractères au maximum',
+            'lastname.max' => 'Votre nom doit comporter 60 caractères au maximum',
+            'login.required' => 'Un pseudo est requis pour votre login',
+            'login.string' => 'Votre pseudo doit être en caractères alphanumériques(a..z)',
+            'login.max' => 'Votre pseudo doit comporter 30 caractères au maximum',
+            'email.required' => 'Veuillez indiquer votre adresse email',
+            'email.string' => 'Votre adresse email doit être en caractères alphanumériques(a..z)',
+            'email.email' => 'Veuillez indiquer une adresse email correcte (mail@mail.com par exemple)',
+            'email.max' => 'Votre adresse email doit comporter 255 caractères au maximum.',
+            'email.unique' => 'Cette adresse est déjà prise!',
+            'password.required' => 'Veuillez choisir un mot de passe',
+            'password.min' => 'Votre mot de passe doit comporter 8 caractères au minimum',
+            'password.confirmed' => 'Vos deux mots de passe ne sont pas identiques'
         ]);
     }
 
@@ -87,8 +108,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $firstname = $data['firstname'];
+        $lastname = $data['lastname'];
         return User::create([
-            'name' => $data['name'],
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'login' => $data['login'],
+            'name' => $firstname.' '.$lastname,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'language_id' => $data['language_id'],
