@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
+
 
 class RegisterController extends Controller
 {
@@ -54,14 +56,28 @@ class RegisterController extends Controller
      *
      * @return response()
      */
-    // public function register(Request $request)
-    // {
-    //     $this->validator($request->all())->validate();
-  
-    //     $this->create($request->all());
-  
-    //     return redirect()->route('home')->with('status','Votre compte a été crée avec succès!');
-    // }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = new User();
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->login = $request->login;
+        $user->name = $request->firstname.' '.$request->lastname;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->language_id = $request->language_id;
+
+        $user->save();
+        
+        event(new Registered($user));
+
+        auth()->login($user);
+
+        return redirect()->route('home.index')->with('success', "Account successfully registered.");
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -79,7 +95,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'language_id' => ['required']
-        ],[
+        ], [
             'firstname.required' => 'Veuillez indiquer votre prénom.',
             'lastname.required' => 'Veuillez indiquer votre nom.',
             'firstname.string' => 'Votre prénom doit être en caractères alphanumériques(a..z)',
@@ -97,27 +113,6 @@ class RegisterController extends Controller
             'password.required' => 'Veuillez choisir un mot de passe',
             'password.min' => 'Votre mot de passe doit comporter 8 caractères au minimum',
             'password.confirmed' => 'Vos deux mots de passe ne sont pas identiques'
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        $firstname = $data['firstname'];
-        $lastname = $data['lastname'];
-        return User::create([
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'login' => $data['login'],
-            'name' => $firstname.' '.$lastname,
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'language_id' => $data['language_id'],
         ]);
     }
 }

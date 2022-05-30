@@ -1,19 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Votre Panier</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('cart.index') }}">Cart</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{ Breadcrumbs::render('panier') }}
     <!-- End Banner Area -->
 
     <div class="container my-3 col-md-6">
@@ -50,7 +38,8 @@
                                                 <div class="p-2 px-3 text-uppercase">Representation(s) </div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Prix <span class="text-lowercase">(sous-total)</span></div>
+                                                <div class="py-2 text-uppercase">Prix <span
+                                                        class="text-lowercase">(sous-total)</span></div>
                                             </th>
                                             <th scope="col" class="border-0 bg-light">
                                                 <div class="py-2 text-uppercase">Reservation(s)</div>
@@ -65,17 +54,20 @@
                                             <tr>
                                                 <th scope="row" class="border-0">
                                                     <div class="p-1">
-                                                        <a href="{{ route('show.show', $representation->model->show->slug) }}"><img
+                                                        <a
+                                                            href="{{ route('show.show', $representation->model->show->slug) }}"><img
                                                                 src="{{ Voyager::image($representation->model->show->poster_url) }}"
                                                                 alt="image spectacle" width="70"
                                                                 class="img-fluid rounded shadow-sm"></a>
                                                         <div class="ml-3 d-inline-block align-middle">
-                                                            <h6>({{$representation->model->show->title }}) | {{ $representation->model->when->format('d-m-Y à H:m') }}</h6>
+                                                            <h6>({{ $representation->model->show->title }}) |
+                                                                {{ $representation->model->when->format('d-m-Y à H:m') }}
+                                                            </h6>
                                                         </div>
                                                     </div>
                                                 </th>
                                                 <td class="border-0 align-top">
-                                                    <strong> {{ $representation->subtotal()}} &euro;</strong>
+                                                    <strong> {{ $representation->subtotal() }} &euro;</strong>
                                                 </td>
                                                 <td class="border-0 align-top">
                                                     <div class="product_count">

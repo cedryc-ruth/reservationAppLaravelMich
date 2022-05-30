@@ -2,20 +2,7 @@
 
 @section('content')
     <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Karma e-reservation</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('show.nextindex') }}">Prochains spectacles<span
-                                class="lnr lnr-arrow-right"></span></a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{ Breadcrumbs::render('spectacles') }}
     <!-- End Banner Area -->
 
     <!-- start product Area -->
@@ -25,7 +12,6 @@
             <div class="col-lg-6 text-center">
                 <div class="section-title">
                     <h1>Spectacles à l'affiche</h1>
-                    <p>Tous les spectacles à l'affiche sont reservables</p>
                 </div>
             </div>
         </div>
@@ -41,8 +27,63 @@
                 </button>
             </div>
         @endif
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ $message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <!-- Barre de recherche -->
-        <div class="row justify-content-end mb-3">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="d-flex">
+                            <h3>Prix: </h3>
+                            <a href="{{ route('show.index', ['sort' => 'asc']) }}" class="btn btn-info mx-2"><i
+                                    class="fa-solid fa-arrow-up"></i></a>
+                            <a href="{{ route('show.index', ['sort' => 'desc']) }}" class="btn btn-info"><i
+                                    class="fa-solid fa-arrow-down"></i></a>
+                            <form action="{{ route('show.searchbyprice') }}" class="d-flex align-items-center"
+                                method="GET">
+                                <input type="number" name="price1" class="form-control p-1 mx-2" min="5" value="5">
+                                <input type="number" name="price2" class="form-control p-1" min="10" value="10">
+                                <h4 class="mx-1">&euro;</h4>
+                                <button type="submit" class="btn btn-info mx-1"><i
+                                        class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-5">
+                    <form action="{{ route('show.searchbydate') }}" method="GET">
+                        <div class="d-flex form-group mb-0">
+                            <input type="date" name="date1" class="form-control mx-2"
+                                value="{{ old('date1', date('Y-m-d')) }}">
+                            <input type="date" name="date2" class="form-control"
+                                value="{{ old('date2', date('Y-m-d')) }}">
+                            <button type="submit" class="btn btn-info mx-1"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <form action="{{ route('show.search') }}" class="d-flex mr-3 align-items-center" method="GET">
+                        <div class="form-group mb-0">
+                            <input type="text" class="form-control" name="search" placeholder="Recherche ...">
+                        </div>
+                        <button type="submit" class="btn btn-info mx-1"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        {{-- <div class="row justify-content-end mb-3">
             <div class="col-lg-3">
                 <form action="{{ route('show.search') }}" class="d-flex mr-3 align-items-center" method="GET">
                     <div class="form-group mb-0">
@@ -51,12 +92,13 @@
                     <button type="submit" class="btn btn-info mx-1"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             @foreach ($shows as $show)
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
-                        <img src="{{ Voyager::image($show->poster_url) }}" alt="Image d'un show" class="card-img-top" />
+                        <img src="{{ Voyager::image($show->poster_url) }}" alt="Image d'un show"
+                            class="card-img-top" />
                         <div class="card-body">
                             <h5 class="card-title">{{ $show->title }}</h5>
                             <p class="card-text">{{ $show->subtitle }}</p>
@@ -92,8 +134,8 @@
                 </div>
             @endforeach
         </div>
-        <div class="d-flex justify-content-center mt-4">
-            {{ $shows->links() }}
+        <div class="d-flex justify-content-center mt-5">
+            {{ $shows->appends(request()->input())->links() }}
         </div>
 
     </div>

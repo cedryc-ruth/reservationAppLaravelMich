@@ -1,19 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Spectacle en details</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('artist.index') }}">Artistes<span class="lnr lnr-arrow-right"></span></a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{ Breadcrumbs::render('artiste', $artist) }}
     <!-- End Banner Area -->
 
     <!--================Single Artist Area =================-->
@@ -63,8 +51,11 @@
     <!--================Artist Description Area =================-->
     <section class="product_description_area">
         <div class="container mt-4">
-            <h2 class="text-center mb-4">Petite Bio</h2>
+            <h2 class="text-center mb-4">Bio</h2>
             <p>{{ $artist->bio }}</p>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="{{ route('artist.index') }}" class="btn btn-info">Retour à l'index</a>
+            </div>
         </div>
     </section>
     <!--================End Artist Description Area =================-->

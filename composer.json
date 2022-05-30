@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "ext-gd": "*",
+        "diglactic/laravel-breadcrumbs": "^7.2",
         "fakerphp/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.2",
         "hardevine/shoppingcart": "^3.1",

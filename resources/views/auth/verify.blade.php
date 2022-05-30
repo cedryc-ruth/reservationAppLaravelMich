@@ -9,7 +9,7 @@
                     <h1>Home Page</h1>
                     <nav class="d-flex align-items-center">
                         <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('home') }}">Home Page</a>
+                        <a href="{{ route('home.index') }}">Home Page</a>
                     </nav>
                 </div>
             </div>
@@ -25,12 +25,11 @@
                         <div class="card-body">
                             @if (session('resent'))
                                 <div class="alert alert-success" role="alert">
-                                    Un lien de vérification a été envoyé à votre adresse email. Veuillez consulter votre boîte
+                                    Un lien de vérification a été envoyé à votre adresse email. 
                                 </div>
                             @endif
 
-                            {{ __('Before proceeding, please check your email for a verification link.') }}
-                            {{ __('If you did not receive the email') }},
+                            Veuillez consulter votre boîte d'email. Si vous n'avez pas reçu d'email
                             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                                 @csrf
                                 <button type="submit"

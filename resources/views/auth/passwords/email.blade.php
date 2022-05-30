@@ -1,20 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Réinitialiser votre mot de passe</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('password.request') }}">Réinitialiser le mot de passe</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Banner Area -->
+    {{ Breadcrumbs::render('forgotPassword') }}
 
     <!--================Login Box Area =================-->
     <section class="login_box_area section_gap">
@@ -35,7 +22,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="login_form_inner">
-                        <h3>Reset votre mot de passe</h3>
+                        <h3>Réinitialiser votre mot de passe</h3>
 
                         <form class="row login_form" action="{{ route('password.email') }}" method="POST" id="contactForm"
                             novalidate="novalidate" method="POST">
@@ -51,8 +38,7 @@
                             </div>
 
                             <div class="col-md-12 form-group">
-                                <button type="submit" value="submit" class="primary-btn">Envoyer un lien de mise à
-                                    jour</button>
+                                <button type="submit" value="submit" class="primary-btn">Envoyez le lien</button>
                             </div>
                         </form>
                     </div>

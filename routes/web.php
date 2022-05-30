@@ -10,6 +10,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SaveCartController;
 use App\Http\Controllers\ShowController;
@@ -25,20 +26,14 @@ use App\Http\Controllers\ShowController;
 |
 */
 
-// Home
-
-Route::get('/home', [HomeController::class,'index'])->name('home.index');
-
-// Orders
-
-Route::get('/orders', [HomeController::class,'orders'])->name('home.orders');
 
 // Show
 
-Route::get('/',[ShowController::class,'index'])->name('show.index');
-Route::get('/next-shows',[ShowController::class,'nextIndex'])->name('show.nextindex');
-Route::get('/show/{show}',[ShowController::class,'show'])->name('show.show');
+Route::get('/', [ShowController::class,'index'])->name('show.index');
+Route::get('/show/{show}', [ShowController::class,'show'])->name('show.show');
 Route::get('/search', [ShowController::class,'search'])->name('show.search');
+Route::get('/search-by-date',[ShowController::class,'searchByDate'])->name('show.searchbydate');
+Route::get('/search-by-price',[ShowController::class,'searchByPrice'])->name('show.searchbyprice');
 Route::get('/contact', [ShowController::class,'contact'])->name('show.contact');
 
 
@@ -64,8 +59,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 // Artist
 
-Route::get('/artist',[ArtistController::class,'index'])->name('artist.index');
-Route::get('/artist/{artist}/show',[ArtistController::class,'show'])->name('artist.show');
+Route::get('/artist', [ArtistController::class,'index'])->name('artist.index');
+Route::get('/artist/{artist}/show', [ArtistController::class,'show'])->name('artist.show');
 
 
 // Authentification
@@ -78,14 +73,44 @@ Auth::routes(['verify' => true]);
 Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class,'register']);
 
-// Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
-// Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
+// Route pour la vérification de l'email après enregistrement
+
+Route::group(['middleware' => ['auth']], function () {
+  
+    /**
+    * Email Verification Routes
+    */
+    Route::get('/email/verify', [VerificationController::class,'show'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify')->middleware(['signed']);
+    Route::post('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
+});
+
+//only authenticated can access this group
+
+Route::group(['middleware' => ['auth']], function () {
+
+    //only verified account can access with this group
+
+    Route::group(['middleware' => ['verified']], function () {
+        // Home
+
+        Route::get('/home', [HomeController::class,'index'])->name('home.index');
+
+        // Orders
+
+        Route::get('/orders', [HomeController::class,'orders'])->name('home.orders');
+
+        // Change password in home page
+
+        Route::post('/changePassword', [HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
+
+    });
+});
 
 
-// Change password
+// Reset password if forgotten
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/changePassword', [HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
     Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
     Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
 });

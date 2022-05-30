@@ -1,19 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Orders</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="{{ route('show.index') }}">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('home.orders') }}">Orders</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{ Breadcrumbs::render('commandes') }}
     <!-- End Banner Area -->
     <div class="container my-5">
         <div class="orders">

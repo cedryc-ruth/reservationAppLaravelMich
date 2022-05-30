@@ -1,22 +1,7 @@
 @extends('layouts.master')
-
-
-
 @section('content')
     <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Enregistrement</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('register') }}">Enregistrement</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{ Breadcrumbs::render('enregistrement') }}
     <!-- End Banner Area -->
 
 
@@ -25,6 +10,14 @@
 
     <section class="login_box_area section_gap">
         <div class="container">
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{ $message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-6">
                     <div class="login_box_img h-100">
@@ -39,11 +32,12 @@
                     <div class="login_form_inner">
                         <h3>Enregistrement</h3>
                         <form class="row login_form" action="{{ route('register') }}" method="POST" id="contactForm"
-                            novalidate="novalidate" method="POST">
+                           method="POST">
                             @csrf
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname"
-                                    name="firstname" placeholder="Votre prénom" value="{{ old('firstname') }}">
+                                <input type="text" class="form-control @error('firstname') is-invalid @enderror"
+                                    id="firstname" name="firstname" placeholder="Votre prénom"
+                                    value="{{ old('firstname') }}">
                                 @error('firstname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -51,17 +45,17 @@
                                 @enderror
                             </div>
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname"
-                                    name="lastname" placeholder="Votre nom" value="{{ old('lastname') }}">
+                                <input type="text" class="form-control @error('lastname') is-invalid @enderror"
+                                    id="lastname" name="lastname" placeholder="Votre nom" value="{{ old('lastname') }}">
                                 @error('lastname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            
+
                             <input type="hidden" class="form-control" name="name">
-                          
+
 
                             <div class="col-md-12 form-group">
                                 <input type="text" class="form-control @error('login') is-invalid @enderror" id="login"

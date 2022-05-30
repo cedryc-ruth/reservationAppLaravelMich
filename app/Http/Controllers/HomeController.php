@@ -12,16 +12,6 @@ use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth','verified']);  // POur que l'utilisateur ait accès à son espace personnel, il faut qu'il soit authentifié et son email vérifié
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -33,13 +23,13 @@ class HomeController extends Controller
         return view('home.index', compact('user', 'languages'));
     }
 
-    public function updateUserInfo(UserRequest $request, User $user)
-    {
-        $request->validated();
+    // public function updateUserInfo(UserRequest $request, User $user)
+    // {
+    //     $request->validated();
 
-        $user->name = $request->name;
-        $user->email =$request->email;
-    }
+    //     $user->name = $request->name;
+    //     $user->email =$request->email;
+    // }
 
     public function changePasswordPost(Request $request)  // fonction pour changer le mot de passe 
     {

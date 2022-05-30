@@ -8,7 +8,7 @@
                     <h1>Nouveau mot de passe</h1>
                     <nav class="d-flex align-items-center">
                         <a href="{{ route('show.index') }}">Spectacles<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{{ route('home') }}">Page personnelle</a>
+                        <a href="{{ route('home.index') }}">Page personnelle</a>
                     </nav>
                 </div>
             </div>
