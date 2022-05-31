@@ -37,6 +37,15 @@
         @endif
         <!-- Barre de recherche -->
         <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <h3>Réservable: </h3>
+                        <a href="{{ route('show.index', ['reservable' => '1']) }}" class="btn btn-info mx-2">Oui</a>
+                        <a href="{{ route('show.index', ['reservable' => '0']) }}" class="btn btn-info">Non</a>
+                    </div>
+                </div>
+            </div>
             <div class="row ">
                 <div class="col-lg-4">
                     <div class="d-flex flex-wrap align-items-center">
@@ -74,7 +83,7 @@
                 <div class="col-lg-3">
                     <form action="{{ route('show.search') }}" class="d-flex mr-3 align-items-center" method="GET">
                         <div class="form-group mb-0">
-                            <input type="text" class="form-control" name="search" placeholder="Recherche ...">
+                            <input type="text" class="form-control" name="search" placeholder="Recherche sur titre ...">
                         </div>
                         <button type="submit" class="btn btn-info mx-1"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>

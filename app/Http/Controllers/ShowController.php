@@ -24,6 +24,14 @@ class ShowController extends Controller
         $today = new DateTime(now());
         $shows = Show::join('representations', 'show_id', '=', 'shows.id')
                  ->where('when', '>=', $today->format('Y-m-d H:i:s'));
+
+        // dd(request()->reservable);
+
+        if (request()->reservable == '1') {
+            $shows = $shows->where('bookable', '=', 1);
+        } elseif (request()->reservable == '0') {
+            $shows = $shows->where('bookable', '=', 0);
+        }
               
         // Filtrage par prix croissant et décroissant sur la page index
 
@@ -89,38 +97,35 @@ class ShowController extends Controller
     public function searchByDate(Request $request)
     {
 
-        // On récupère les dates du formulaire de recherche à travers l'objet Request
+        // On récupère les dates du formulaire de recherche à travers l'objet Request (de type string)
+
         $d1 = $request->date1;  // date du début
         $d2 = $request->date2;  // date de fin
     
 
-        // On instancie 2 objets date Carbon pour leur assignent un format de date spécifique
+        // On instancie 2 objets DateTime qui encapsule les dates récuperées dans l'objet Request pour pouvoir les utiliser dans la requête eloquent
 
-        $startDate = Carbon::createFromFormat('Y-m-d', $d1);
-        $endDate = Carbon::createFromFormat('Y-m-d', $d2);
-
-        // $date1 = new DateTime($request->date1);
-        // $date2 = new DateTime($request->date2);
+        $date1 = new DateTime($request->date1);
+        $date2 = new DateTime($request->date2);
         $today = new DateTime(now());  // On récupère la date du jour courant
 
         $shows = Show::join('representations', 'show_id', '=', 'shows.id')
                  ->where('when', '>=', $today->format('Y-m-d'))
                 //  ->whereBetween('when', [$date1->format('Y-m-d H:i:s'),$date2->format('Y-m-d H:i:s')])
-                ->whereDate('when', '>=', $startDate)
-                ->whereDate('when', '<=', $endDate);
-
-
-        $p1 = 0;
-        $p2 = 0;
-        // Si on applique une requête de recherche par intervalle de prix , on récupère les 2 prix saisis dans les input du formulaire
-
-        if ($request->price1 && $request->price2) {
-            $p1 = $request->price1;
-            $p2 = $request->price2;
-            $shows = $shows->whereBetween('price', [$p1, $p2]);  // On cherche les spectacles entre cet intervalle de prix
-        }
+                ->whereDate('when', '>=', $date1->format('Y-m-d'))
+                ->whereDate('when', '<=', $date2->format('Y-m-d'));
 
         
+        //Si on applique le filtre de réservation sous le critère "bookable"
+        
+        if (request()->reservable == '1') {
+            $shows = $shows->where('bookable', '=', 1);
+        }
+        
+        if (request()->reservable == '0') {
+            $shows = $shows->where('bookable', '=', 0);
+        }
+
 
         // Si on applique le filtre de recherche par prix croissant ou décroissant sur les résultats de recherche
 
@@ -132,7 +137,7 @@ class ShowController extends Controller
             $shows = $shows->distinct()->orderBy('when', 'asc')->paginate(3, ['shows.*']);
         }
 
-        return view('show.searchbydate', compact('shows', 'd1', 'd2', 'p1', 'p2'));
+        return view('show.searchbydate', compact('shows', 'd1', 'd2')); // On passe les dates en string pour pouvoir
     }
 
     public function searchByPrice(Request $request)
@@ -149,27 +154,24 @@ class ShowController extends Controller
         $p1 = 0;
         $p2 = 0;
 
-        $d1 = new DateTime();
-        $d2 = new DateTime();
-
         if ($request->price1 && $request->price2) {
             $p1 = $request->price1;
             $p2 = $request->price2;
             $shows = $shows->whereBetween('price', [$p1, $p2]);
         }
 
-        // Si l'utilisateur applique le filtre par date
 
-        if ($request->date1 && $request->date2) {
-            $d1 = $request->date1;
-            $d2 = $request->date2;
-
-            $startDate = Carbon::createFromFormat('Y-m-d', $d1);
-            $endDate = Carbon::createFromFormat('Y-m-d', $d2);
-            
-            $shows = $shows->whereDate('when', '>=', $startDate)
-                           ->whereDate('when', '<=', $endDate);
+        //Si on applique le filtre de réservation sous le critère "bookable"
+        
+        if (request()->reservable == '1') {
+            $shows = $shows->where('bookable', '=', 1);
         }
+        
+        if (request()->reservable == '0') {
+            $shows = $shows->where('bookable', '=', 0);
+        }
+
+
         // Tri par filtre des prix croissants ou décroissants
 
         if (request()->sort == 'asc') {
@@ -179,9 +181,7 @@ class ShowController extends Controller
         } else {
             $shows = $shows->distinct()->orderBy('when', 'asc')->paginate(3, ['shows.*']);
         }
-
-    
         
-        return view('show.searchbyprice', compact('shows', 'p1', 'p2', 'd1', 'd2'));
+        return view('show.searchbyprice', compact('shows', 'p1', 'p2'));
     }
 }

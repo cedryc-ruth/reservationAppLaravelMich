@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                 <div class="section-title">
-                     <h3>Résultats de recherche par interval des prix</h3>
+                    <h3>Résultats de recherche par prix</h3>
                     <a href="{{ route('show.index') }}" class="btn btn-info">Retour à l'index</a>
                 </div>
             </div>
@@ -38,14 +38,25 @@
         @endif
         <!-- Barre de recherche -->
         <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <h3>Réservable: </h3>
+                        <a href="{{ route('show.searchbyprice', ['price1' => $p1, 'price2' => $p2, 'reservable' => '1']) }}"
+                            class="btn btn-info mx-2">Oui</a>
+                        <a href="{{ route('show.searchbyprice', ['price1' => $p1, 'price2' => $p2, 'reservable' => '0']) }}"
+                            class="btn btn-info">Non</a>
+                    </div>
+                </div>
+            </div>
             <div class="row ">
                 <div class="col-lg-4">
                     <div class="d-flex flex-wrap align-items-center">
                         <div class="d-flex">
                             <h3>Prix: </h3>
-                            <a href="{{ route('show.searchbyprice', ['price1' => $p1, 'price2' => $p2, 'date1' => $d1, 'date2' => $d2, 'sort' => 'asc']) }}"
+                            <a href="{{ route('show.searchbyprice', ['price1' => $p1, 'price2' => $p2, 'sort' => 'asc']) }}"
                                 class="btn btn-info mx-2"><i class="fa-solid fa-arrow-up"></i></a>
-                            <a href="{{ route('show.searchbyprice', ['price1' => $p1, 'price2' => $p2, 'date1' => $d1, 'date2' => $d2, 'sort' => 'desc']) }}"
+                            <a href="{{ route('show.searchbyprice', ['price1' => $p1, 'price2' => $p2, 'sort' => 'desc']) }}"
                                 class="btn btn-info"><i class="fa-solid fa-arrow-down"></i></a>
                             <form action="{{ route('show.searchbyprice') }}" class="d-flex align-items-center"
                                 method="GET">
@@ -61,7 +72,7 @@
 
                 </div>
                 <div class="col-lg-5">
-                    <form action="{{ route('show.searchbyprice') }}" method="GET">
+                    <form action="{{ route('show.searchbydate') }}" method="GET">
                         <div class="d-flex form-group mb-0">
                             <input type="date" name="date1" class="form-control mx-2"
                                 value="{{ old('date1', date('Y-m-d')) }}">
@@ -75,7 +86,7 @@
                 <div class="col-lg-3">
                     <form action="{{ route('show.search') }}" class="d-flex mr-3 align-items-center" method="GET">
                         <div class="form-group mb-0">
-                            <input type="text" class="form-control" name="search" placeholder="Recherche ...">
+                            <input type="text" class="form-control" name="search" placeholder="Recherche sur titre ...">
                         </div>
                         <button type="submit" class="btn btn-info mx-1"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>

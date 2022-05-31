@@ -38,18 +38,30 @@
         @endif
         <!-- Barre de recherche -->
         <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <h3>Réservable: </h3>
+                        <a href="{{ route('show.search', ['reservable' => '1']) }}"
+                            class="btn btn-info mx-2 disabled">Oui</a>
+                        <a href="{{ route('show.search', ['reservable' => '0']) }}" class="btn btn-info disabled">Non</a>
+                    </div>
+                </div>
+            </div>
             <div class="row ">
                 <div class="col-lg-4">
                     <div class="d-flex flex-wrap align-items-center">
                         <div class="d-flex">
                             <h3>Prix: </h3>
-                            <a href="{{ route('show.search', ['sort' => 'asc']) }}" class="btn btn-info mx-2"><i
+                            <a href="{{ route('show.search', ['sort' => 'asc']) }}" class="btn btn-info mx-2 disabled"><i
                                     class="fa-solid fa-arrow-up"></i></a>
-                            <a href="{{ route('show.search', ['sort' => 'desc']) }}" class="btn btn-info"><i
+                            <a href="{{ route('show.search', ['sort' => 'desc']) }}" class="btn btn-info disabled"><i
                                     class="fa-solid fa-arrow-down"></i></a>
-                            <form action="" class="d-flex">
+                            <form action="{{ route('show.searchbyprice') }}" class="d-flex align-items-center"
+                                method="GET">
                                 <input type="number" name="price1" class="form-control mx-2" min="5" value="5">
                                 <input type="number" name="price2" class="form-control" min="5" value="30">
+                                <h4 class="mx-1">&euro;</h4>
                                 <button type="submit" class="btn btn-info mx-1"><i
                                         class="fa-solid fa-magnifying-glass"></i></button>
                             </form>
