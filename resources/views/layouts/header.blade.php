@@ -30,9 +30,9 @@
                                      Export & Import
                                  </button>
                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                     <a class="dropdown-item" href="{{ route('show.exportExcel') }}">Export Show (Excel Format)</a>
-                                     <a class="dropdown-item" href="{{ route('show.exportCSV') }}">Export Show (CSV Format)</a>
-                                     <a class="dropdown-item" href="#">Something else here</a>
+                                     <a class="dropdown-item" href="{{ route('exportExcel') }}">Export Shows (Excel Format)</a>
+                                     <a class="dropdown-item" href="{{ route('exportCSV') }}">Export Shows (CSV Format)</a>
+                                     <a class="dropdown-item" href="{{ route('downloadPDF') }}">Export Shows (PDF Format)</a>
                                  </div>
                              </div>
                          @endif

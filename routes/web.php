@@ -6,13 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\SaveCartController;
 use App\Http\Controllers\ShowController;
 
 /*
@@ -36,10 +33,15 @@ Route::get('/search-by-date',[ShowController::class,'searchByDate'])->name('show
 Route::get('/search-by-price',[ShowController::class,'searchByPrice'])->name('show.searchbyprice');
 Route::get('/contact', [ShowController::class,'contact'])->name('show.contact');
 
-// Export show in Excel & CSV
+// Export shows in Excel & CSV
 
-Route::get('/export-excel',[ShowController::class,'exportIntoExcel'])->name('show.exportExcel');
-Route::get('/export-csv',[ShowController::class,'exportIntoCSV'])->name('show.exportCSV');
+Route::get('/export-excel',[ShowController::class,'exportIntoExcel'])->name('exportExcel');
+Route::get('/export-csv',[ShowController::class,'exportIntoCSV'])->name('exportCSV');
+
+// Export shows in PDF
+
+// Route::get('/all-view',[ShowController::class,'getAllshow'])->name('allView');
+Route::get('/export-pdf',[ShowController::class,'downloadPDF'])->name('downloadPDF');
 
 
 

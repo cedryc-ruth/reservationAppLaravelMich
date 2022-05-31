@@ -8,6 +8,7 @@ use App\Exports\ShowExport;
 use Illuminate\Http\Request;
 use App\Models\Representation;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\Console\Input\Input;
 
@@ -200,5 +201,24 @@ class ShowController extends Controller
     public function exportIntoCSV()
     {
         return Excel::download(new ShowExport,'show.csv');
+    }
+
+    /**
+     * Fonctions pour exporter les shows en fichier PDF
+     */
+
+    // public function getAllShow()  // On crée une fonction qui encapsule des données dans une vue qui va se transformer en fichier PDF
+    // {
+    //     $shows = Show::all();
+    //     return view('show.allshows',compact('shows'));
+    // }
+
+    public function downloadPDF()
+    {
+        $shows = Show::all();
+        $pdf = Pdf::loadView('show.allshows',compact('shows'));
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('shows.pdf');
+        
     }
 }
