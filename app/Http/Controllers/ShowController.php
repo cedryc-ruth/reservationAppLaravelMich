@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use App\Models\Show;
+use App\Exports\ShowExport;
 use Illuminate\Http\Request;
 use App\Models\Representation;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\Console\Input\Input;
 
 class ShowController extends Controller
@@ -183,5 +185,20 @@ class ShowController extends Controller
         }
         
         return view('show.searchbyprice', compact('shows', 'p1', 'p2'));
+    }
+
+
+    /**
+     * Deux fonctions qui exportent les shows aux formats Excel & CSV
+     */
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ShowExport,'show.xlsx');
+    }
+
+    public function exportIntoCSV()
+    {
+        return Excel::download(new ShowExport,'show.csv');
     }
 }

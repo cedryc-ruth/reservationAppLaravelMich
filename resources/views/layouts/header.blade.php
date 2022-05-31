@@ -1,6 +1,6 @@
  <!-- Start Header Area -->
  <header class="header_area sticky-header">
-     <div class="main_menu">
+     <div class="main_menu d-flex align-items-center">
          <nav class="navbar navbar-expand-lg navbar-light fixed-top mx-5">
              {{-- <div class="container"> --}}
              <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,7 +23,19 @@
                                  </a>
                              </li>
                          @endif
-
+                         @if (Auth::user()->hasRole('admin'))
+                             <div class="dropdown">
+                                 <button class="btn btn-success btn-sm dropdown-toggle mx-2" type="button" id="dropdownMenuButton"
+                                     data-toggle="dropdown" aria-expanded="false">
+                                     Export & Import
+                                 </button>
+                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                     <a class="dropdown-item" href="{{ route('show.exportExcel') }}">Export Show (Excel Format)</a>
+                                     <a class="dropdown-item" href="{{ route('show.exportCSV') }}">Export Show (CSV Format)</a>
+                                     <a class="dropdown-item" href="#">Something else here</a>
+                                 </div>
+                             </div>
+                         @endif
                          @if (Auth::user()->hasRole('artist'))
                              <li class="nav-item">
                                  <a class="nav-link" href="/admin" target="_blank">
@@ -66,10 +78,10 @@
                          </a>
                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                              <a href="#" class="nav-link">
-                                <i class="fa-solid fa-house mx-1"></i>Salles par nom
+                                 <i class="fa-solid fa-house mx-1"></i>Salles par nom
                              </a>
                              <a href="#" class="nav-link">
-                                <i class="fa-solid fa-location-arrow mx-1"></i>Salles par lieu
+                                 <i class="fa-solid fa-location-arrow mx-1"></i>Salles par lieu
                              </a>
                          </div>
                      </li>
@@ -108,7 +120,7 @@
                                  <div class="dropdown-divider"></div>
                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                      onclick="event.preventDefault();
-                                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                                 document.getElementById('logout-form').submit();">
                                      <i class="fas fa-sign-out-alt"></i> Se déconnecter
                                  </a>
 

@@ -36,6 +36,11 @@ Route::get('/search-by-date',[ShowController::class,'searchByDate'])->name('show
 Route::get('/search-by-price',[ShowController::class,'searchByPrice'])->name('show.searchbyprice');
 Route::get('/contact', [ShowController::class,'contact'])->name('show.contact');
 
+// Export show in Excel & CSV
+
+Route::get('/export-excel',[ShowController::class,'exportIntoExcel'])->name('show.exportExcel');
+Route::get('/export-csv',[ShowController::class,'exportIntoCSV'])->name('show.exportCSV');
+
 
 
 // Cart page

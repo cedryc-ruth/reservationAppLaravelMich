@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\ArtistType;
 use App\Models\Representation;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,11 +37,23 @@ class Show extends Model
 
     public function artistTypes()
     {
-        return $this->belongsToMany(ArtistType::class);
+        return $this->belongsToMany(ArtistType::class);  // Un show a plusieurs types d'artistes
     }
 
     public function representations()
     {
-        return $this->hasMany(Representation::class);
+        return $this->hasMany(Representation::class);  // Un show a plusieurs présentations
     }
+
+    /**
+     *  Export des listes de spectacles en Excel/CSV
+     */
+
+     // fonction statique qui retourne les colonnes de la table "shows" sous forme d'un tableau 
+
+     public static function getShow()
+     {
+        $records =  DB::table('shows')->select('id','title','subtitle','bookable','price')->get()->toArray();
+        return $records;
+     }
 }
