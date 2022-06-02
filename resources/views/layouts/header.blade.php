@@ -25,14 +25,19 @@
                          @endif
                          @if (Auth::user()->hasRole('admin'))
                              <div class="dropdown">
-                                 <button class="btn btn-success btn-sm dropdown-toggle mx-2" type="button" id="dropdownMenuButton"
-                                     data-toggle="dropdown" aria-expanded="false">
+                                 <button class="btn btn-success btn-sm dropdown-toggle mx-2" type="button"
+                                     id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
                                      Export & Import
                                  </button>
                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                     <a class="dropdown-item" href="{{ route('exportExcel') }}">Export Shows (Excel Format)</a>
-                                     <a class="dropdown-item" href="{{ route('exportCSV') }}">Export Shows (CSV Format)</a>
-                                     <a class="dropdown-item" href="{{ route('downloadPDF') }}">Export Shows (PDF Format)</a>
+                                     <a class="dropdown-item" href="{{ route('exportExcel') }}">Export Shows (Excel
+                                         Format)</a>
+                                     <a class="dropdown-item" href="{{ route('exportCSV') }}">Export Shows (CSV
+                                         Format)</a>
+                                     <a class="dropdown-item" href="{{ route('downloadPDF') }}">Export Shows (PDF
+                                         Format)</a>
+                                     <a class="dropdown-item" href="{{ route('importForm') }}" target="_blank">Import
+                                         Shows (Excel or CSV Format)</a>
                                  </div>
                              </div>
                          @endif
@@ -90,6 +95,11 @@
                              <i class="fas fa-envelope mx-1"></i>Contact
                          </a>
                      </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{{ route('feeds.main') }}">
+                             <i class="fa-solid fa-square-rss mx-1"></i>RSS
+                         </a>
+                     </li>
                  </ul>
 
                  <ul class="nav navbar-nav menu_nav ml-auto">
@@ -120,7 +130,7 @@
                                  <div class="dropdown-divider"></div>
                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                      onclick="event.preventDefault();
-                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                     document.getElementById('logout-form').submit();">
                                      <i class="fas fa-sign-out-alt"></i> Se déconnecter
                                  </a>
 

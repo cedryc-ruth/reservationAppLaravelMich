@@ -14,14 +14,14 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('paiement_firstname');
             $table->string('paiement_lastname');
-            $table->string('paiement_phone');
             $table->string('paiement_email');
-            $table->string('paiement_address');
-            $table->string('paiement_city');
-            $table->string('paiement_postalcode');
+            $table->string('paiement_phone')->nullable();
+            $table->string('paiement_address')->nullable();
+            $table->string('paiement_city')->nullable();
+            $table->string('paiement_postalcode')->nullable();
             $table->string('discount')->nullable();
             $table->string('paiement_tax');
             $table->string('paiement_total');

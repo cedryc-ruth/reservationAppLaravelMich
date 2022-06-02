@@ -51,17 +51,17 @@ class User extends VoyagerUser implements MustVerifyEmail
     ];
 
     public function representations()
-    {
-        return $this->belongsToMany(Representation::class, 'representation_users', 'user_id', 'representation_id')->withPivot('places'); 
+    { 
+        return $this->belongsToMany(Representation::class)->withPivot('places');  // Un user peut acheter plusieurs représentations
     }
     public function language()
     {
-        return $this->belongsTo(Language::class);  // Un utilisateur a une seule langue principale
+        return $this->belongsTo(Language::class);  // Un utilisateur a une et une seule langue "principale"
     }
     
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class); // Un user peut plusieurs ordres d'achat
     }
     
 }

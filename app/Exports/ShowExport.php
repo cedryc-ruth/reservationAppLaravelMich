@@ -14,9 +14,14 @@ class ShowExport implements FromCollection,WithHeadings
         return [
             'Id',
             'Title',
+            'slug',
             'Subtitle',
+            'poster_url',
+            'images',
             'Bookable',
             'Price',
+            'Description',
+            'Location_id'
         ];
     }
     /**

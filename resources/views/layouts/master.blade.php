@@ -13,6 +13,9 @@
     <!-- Meta Keyword -->
     <meta name="keywords" content="">
     <!-- meta character set -->
+    <!-- feed links -->
+    @include('feed::links')
+
     <meta charset="UTF-8">
     <!-- Site Title -->
     <title>Karma Shop</title>

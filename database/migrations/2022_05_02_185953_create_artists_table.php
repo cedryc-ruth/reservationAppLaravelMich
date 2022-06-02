@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('firstname',60);
             $table->string('lastname',60);
             $table->string('image')->nullable();
-            $table->text('bio');
+            $table->text('bio')->nullable();
             // $table->timestamps();
         });
     }

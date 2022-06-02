@@ -11,7 +11,7 @@ class Type extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $guarded = [];
+    protected $guarded = ['id'];
     protected $table = 'types';
 
     public function artists()

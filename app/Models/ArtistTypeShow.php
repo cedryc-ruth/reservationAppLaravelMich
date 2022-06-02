@@ -11,6 +11,6 @@ class ArtistTypeShow extends Model
 
 
     public $timestamps = false;
-    protected $guarded = [];
+    protected $guarded = ['id'];
     protected $table = 'artist_type_show';
 }

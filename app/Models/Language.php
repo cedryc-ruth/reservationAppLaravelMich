@@ -11,7 +11,7 @@ class Language extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $guarded = [];
+    protected $guarded = ['id'];
     protected $table = 'languages';
 
     public function users()

@@ -11,7 +11,7 @@ class Artist extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $guarded = [];
+    protected $guarded = ['id'];
     protected $table = 'artists';
     
 

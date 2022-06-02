@@ -15,11 +15,11 @@ return new class extends Migration {
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('slug', 255)->unique();
             $table->string('designation', 60);
+            $table->string('slug', 255)->unique();
             $table->string('address', 255);
-            $table->string('website', 255);
-            $table->string('phone', 30);
+            $table->string('website', 255)->nullable();
+            $table->string('phone', 30)->nullable();
             $table->string('image')->nullable();
             $table->foreignId('locality_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
 

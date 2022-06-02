@@ -16,11 +16,14 @@ class LanguageSeeder extends Seeder
      */
     public function run()
     {
-        $langues = ['Français','English','Nederlands'];
+        $langues = [
+            ['language' => 'Français'],
+            ['language' => 'Anglais'],
+            ['language' => 'Espagnol'],
+            ['language' => 'Néerlandais'],
+            ['language' => 'Portugais'],
+        ];
 
-        foreach ($langues as $langue) {
-            Language::create([
-                'language' => $langue]);
-        };
+        Language::insert($langues);
     }
 }

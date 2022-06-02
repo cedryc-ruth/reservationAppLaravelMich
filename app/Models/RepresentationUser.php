@@ -10,8 +10,8 @@ class RepresentationUser extends Model
     use HasFactory;
     
     public $timestamps = false;
-    protected $guarded = [];
-    protected $table = 'representation_users';
+    protected $guarded = ['id'];
+    protected $table = 'representation_user';
 
     public function userId()
     {

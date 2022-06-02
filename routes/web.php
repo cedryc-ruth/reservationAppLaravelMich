@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ArtistController;
 use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Feed\Http\FeedController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ShowController;
+use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ use App\Http\Controllers\ShowController;
 */
 
 
-// Show
+// Show routes
 
 Route::get('/', [ShowController::class,'index'])->name('show.index');
 Route::get('/show/{show}', [ShowController::class,'show'])->name('show.show');
@@ -33,7 +34,7 @@ Route::get('/search-by-date',[ShowController::class,'searchByDate'])->name('show
 Route::get('/search-by-price',[ShowController::class,'searchByPrice'])->name('show.searchbyprice');
 Route::get('/contact', [ShowController::class,'contact'])->name('show.contact');
 
-// Export shows in Excel & CSV
+// Export shows in Excel or CSV
 
 Route::get('/export-excel',[ShowController::class,'exportIntoExcel'])->name('exportExcel');
 Route::get('/export-csv',[ShowController::class,'exportIntoCSV'])->name('exportCSV');
@@ -44,43 +45,57 @@ Route::get('/export-csv',[ShowController::class,'exportIntoCSV'])->name('exportC
 Route::get('/export-pdf',[ShowController::class,'downloadPDF'])->name('downloadPDF');
 
 
+// Import shows in Excel or CSV
 
-// Cart page
+Route::get('/import-form',[ShowController::class,'importForm'])->name('importForm');
+Route::post('/import',[ShowController::class,'import'])->name('import');
+
+// Flux RSS route
+
+// Route::feeds();
+Route::get('feed', FeedController::class)->name("feeds.main");
+
+
+
+
+// Cart page routes
 
 Route::get('/cart', [CartController::class,'index'])->name('cart.index');
 Route::post('/cart/store', [CartController::class,'store'])->name('cart.store');
 Route::delete('/cart/{show}/destroy', [CartController::class,'destroy'])->name('cart.destroy');
 
 
-// Checkout
+// Checkout routes
 
 Route::get('/checkout', [CheckoutController::class,'index'])->name('checkout.index');
 Route::post('/checkout/store', [CheckoutController::class,'store'])->name('checkout.store');
 Route::get('/checkout/success', [CheckoutController::class,'success'])->name('checkout.success');
 
 
+// Voyager TCG routes 
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
 
-// Artist
+// Artist routes
 
 Route::get('/artist', [ArtistController::class,'index'])->name('artist.index');
 Route::get('/artist/{artist}/show', [ArtistController::class,'show'])->name('artist.show');
 
 
-// Authentification
+// Authentification routes
 
 Auth::routes(['verify' => true]);
 
 
-// Register
+// Register routes
 
 Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class,'register']);
 
-// Route pour la vérification de l'email après enregistrement
+// Routes pour la vérification de l'email après enregistrement
 
 Route::group(['middleware' => ['auth']], function () {
   
@@ -92,7 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
 });
 
-//only authenticated can access this group
+
+// Only authenticated person can access this group 
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -115,7 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-// Reset password if forgotten
+// Reset password if forgotten routes
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');

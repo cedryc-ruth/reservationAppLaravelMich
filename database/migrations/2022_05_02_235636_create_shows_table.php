@@ -15,16 +15,16 @@ return new class extends Migration {
     {
         Schema::create('shows', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255)->unique();
+            $table->string('title', 255);
             $table->string('slug', 255)->unique();
-            $table->string('subtitle')->nullable();
+            $table->string('summary')->nullable();
             $table->string('poster_url',255)->nullable();
             $table->text('images')->nullable();
             $table->tinyInteger('bookable')->default('1');
             $table->decimal('price', '10', '2', true)->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignId('location_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

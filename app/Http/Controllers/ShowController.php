@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\Show;
 use App\Exports\ShowExport;
+use App\Imports\ShowImport;
 use Illuminate\Http\Request;
 use App\Models\Representation;
-use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\Console\Input\Input;
+
 
 class ShowController extends Controller
 {
@@ -68,7 +68,7 @@ class ShowController extends Controller
     public function search(Request $request)
     {
     
-        //Recherche des produits sur titre
+        //Recherche de spectacles par titre
 
         $request->validate([   // Contrôle de règles de validation
             'search' => 'required|min:2'
@@ -195,12 +195,12 @@ class ShowController extends Controller
 
     public function exportIntoExcel()
     {
-        return Excel::download(new ShowExport,'show.xlsx');
+        return Excel::download(new ShowExport, 'showlist.xlsx');
     }
 
     public function exportIntoCSV()
     {
-        return Excel::download(new ShowExport,'show.csv');
+        return Excel::download(new ShowExport, 'showlist.csv');
     }
 
     /**
@@ -216,9 +216,36 @@ class ShowController extends Controller
     public function downloadPDF()
     {
         $shows = Show::all();
-        $pdf = Pdf::loadView('show.allshows',compact('shows'));
+        $pdf = Pdf::loadView('show.allshows', compact('shows'));
         $pdf->setPaper('a4', 'landscape');
-        return $pdf->stream('shows.pdf');
-        
+        return $pdf->stream('showlist.pdf');
+    }
+
+    // Fonction pour afficher le formulaire d'importation du fichier CSV ou Excel
+
+    public function importForm()
+    {
+        return view('show.import-form');
+    }
+
+    // Fonction pour importer le fichier CSV ou Excel
+
+    public function import(Request $request)
+    {
+        $request->validate([   // Contrôle de règles de validation
+            'file' => 'required|file|max:1024|mimes:csv,xls,xlsx'
+        ], [
+            'file.required' => 'Aucun fichier chargé!',
+            'file.file' =>'Vous devez charger un fichier!',
+            'file.max' => 'Votre fichier dépasse 1024 MB',
+            'file.mimes' => 'Votre fichier doit être de type csv,xlsx,xls'
+        ]);
+
+        $import = Excel::import(new ShowImport, $request->file);
+
+        if (!$import) {  // Si l'import échoue
+            return redirect()->back()->with('danger', 'L\'importation a échoué');
+        }
+        return redirect()->back()->with('success', 'L\'importation s\'est bien déroulée'); // Si import est un succès
     }
 }

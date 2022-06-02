@@ -9,8 +9,8 @@ class OrderRepresentation extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $timestamps = false;
-    protected $table = 'order_representations';
+    protected $table = 'order_representation';
 
 }

@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
 class Show extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-    protected $guarded = [];
+    // public $timestamps = false;
+    protected $guarded = ['id'];
     protected $table = 'shows';
 
 
@@ -49,11 +50,13 @@ class Show extends Model
      *  Export des listes de spectacles en Excel/CSV
      */
 
-     // fonction statique qui retourne les colonnes de la table "shows" sous forme d'un tableau 
+    // fonction statique qui retourne les colonnes de la table "shows" sous forme d'un tableau
 
-     public static function getShow()
-     {
-        $records =  DB::table('shows')->select('id','title','subtitle','bookable','price')->get()->toArray();
+    public static function getShow()
+    {
+        $records =  DB::table('shows')->select('id', 'title', 'slug', 'subtitle', 'poster_url', 'images', 'bookable', 'price', 'description', 'location_id')
+                                      ->get()->toArray();
         return $records;
-     }
+    }
+
 }

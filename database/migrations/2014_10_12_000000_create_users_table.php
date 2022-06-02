@@ -13,12 +13,16 @@ return new class extends Migration {
      */
     public function up()
     {
+        /**
+         * Les colonnes 'firstname','lastname','login' sont nullable parce que les seeders de l'outil d'administration Voyager TCG
+         * vont générer une erreur dans la mesure où la table 'users' par default de laravel n'integre pas ces colonnes
+         */
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname',60)->nullable();
+            $table->string('firstname',60)->nullable(); 
             $table->string('lastname',60)->nullable();
             $table->string('login',30)->nullable();
-            $table->string('name');
+            $table->string('name'); 
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
