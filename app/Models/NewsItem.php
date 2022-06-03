@@ -8,7 +8,7 @@ use Spatie\Feed\FeedItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class NewsItem extends Show implements Feedable
+class NewsItem extends Show implements Feedable  // La classe modèle NewsItem hérite de la classe Show pour laquelle on va développer un flux rss
 {
     use HasFactory;
 
@@ -27,9 +27,9 @@ class NewsItem extends Show implements Feedable
         ]);
     }
 
-    public static function getFeedItems()
+    public static function getFeedItems()  // Fonction qui retourne les items de notre flux RSS
     {
-        return NewsItem::orderBy('updated_at','desc')->get();
+        return NewsItem::orderBy('updated_at','desc')->get();   // Classés en fonction de leur mise à jour de manière croissante 
     }
-    
+
 }
