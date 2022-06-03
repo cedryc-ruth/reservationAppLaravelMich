@@ -23,12 +23,12 @@ use App\Http\Controllers\ShowController;
 Route::get('/showApi',[ShowApiController::class,'index']);
 Route::get('/showApi/{showApi}',[ShowApiController::class,'show']);
 Route::get('/showApi/search/{title}',[ShowApiController::class,'search']);
-Route::post('/login',[AuthApiController::class,'login']);
+Route::post('/login',[AuthApiController::class,'login']);  // La route pour se logger.
 
 
-// Protected routes
+// Protected routes avec sanctum
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('showApi', ShowApiController::class)->except(['index','show']);
+    Route::resource('showApi', ShowApiController::class)->except(['index','show']); // Toutes les routes sauf index et show
     Route::get('/logout', [AuthApiController::class,'logout']);
 });
