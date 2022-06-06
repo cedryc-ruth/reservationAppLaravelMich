@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\ArtistViaApiController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -59,6 +60,10 @@ Route::post('/import',[ShowController::class,'import'])->name('import');
 Route::get('feed', FeedController::class)->name("feeds.main");
 
 
+// Api
+
+
+Route::get('api',[ShowController::class,'getApi'])->name("show.api");
 
 
 // Cart page routes
@@ -85,6 +90,11 @@ Route::group(['prefix' => 'admin'], function () {
 // Artist routes
 
 Route::resource('artist',ArtistController::class);
+
+// Artistes externes route  via l'api  du théâtre de la ville de Paris.
+
+Route::get('artist-api',[ArtistViaApiController::class,'index'])->name('artist_api.index');
+
 
 // Type routes
 

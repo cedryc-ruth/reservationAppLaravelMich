@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style-card.css') }}">
     <link rel="stylesheet" href="{{ asset('css/artist-card.css') }}">
+    @yield('extra-css')
 </head>
 
 <body>
@@ -60,7 +61,6 @@
     <script src="{{ asset('js/gmaps.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-    @yield('search-js')
 </body>
 
 </html>

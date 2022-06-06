@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\API\AuthApiController;
-use App\Http\Controllers\API\ShowApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShowController;
+use App\Http\Controllers\API\AuthApiController;
+use App\Http\Controllers\API\ShowApiController;
+use App\Http\Controllers\API\ShowFromApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,9 @@ use App\Http\Controllers\ShowController;
 
 // Public routes
 
-Route::get('/showApi',[ShowApiController::class,'index']);
-Route::get('/showApi/{showApi}',[ShowApiController::class,'show']);
-Route::get('/showApi/search/{title}',[ShowApiController::class,'search']);
+Route::get('/showApi',[ShowApiController::class,'index'])->name('showApi.index');
+Route::get('/showApi/{showApi}',[ShowApiController::class,'show'])->name('showApi.show');
+Route::get('/showApi/search/{title}',[ShowApiController::class,'search'])->name('showApi.search');
 Route::post('/login',[AuthApiController::class,'login']);  // La route pour se logger.
 
 

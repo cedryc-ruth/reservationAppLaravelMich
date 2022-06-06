@@ -20,10 +20,10 @@ Breadcrumbs::for('import', function (BreadcrumbTrail $trail) {
     $trail->push('Import', route('importForm'));
 });
 
-// Home > Contact
-Breadcrumbs::for('contact', function (BreadcrumbTrail $trail) {
+// Home > API
+Breadcrumbs::for('api', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Contact', route('show.contact'));
+    $trail->push('API', route('show.api'));
 });
 
 // Home > Perso
@@ -42,6 +42,12 @@ Breadcrumbs::for('artiste', function (BreadcrumbTrail $trail, $artist) {
     $trail->parent('artistes');
     $trail->push($artist->firstname.' '.$artist->lastname, route('artist.index', $artist->id));
 });
+// Home > Artistes Externes
+Breadcrumbs::for('artistes_externes', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Artistes Externes', route('artist_api.index'));
+});
+
 
 // Home > Types
 

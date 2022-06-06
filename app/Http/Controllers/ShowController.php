@@ -92,11 +92,6 @@ class ShowController extends Controller
         return view('show.search', compact('shows'));
     }
 
-    public function contact()
-    {
-        return view('show.contact');
-    }
-
     public function searchByDate(Request $request)
     {
 
@@ -247,5 +242,10 @@ class ShowController extends Controller
             return redirect()->back()->with('danger', 'L\'importation a échoué');
         }
         return redirect()->back()->with('success', 'L\'importation s\'est bien déroulée'); // Si import est un succès
+    }
+
+    public function getApi()
+    {
+        return view('show.api');
     }
 }

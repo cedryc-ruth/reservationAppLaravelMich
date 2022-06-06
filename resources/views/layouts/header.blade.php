@@ -74,6 +74,9 @@
                              <a href="{{ route('type.index') }}" class="nav-link">
                                  <i class="fa-solid fa-pen-fancy mx-1"></i>Artistes par type
                              </a>
+                             <a href="{{ route('artist_api.index') }}" class="nav-link">
+                                <i class="fa-solid fa-earth-europe mx-1"></i>Artistes externes
+                             </a>
                          </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -91,13 +94,13 @@
                          </div>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" href="{{ route('show.contact') }}">
-                             <i class="fas fa-envelope mx-1"></i>Contact
+                         <a class="nav-link" href="{{ route('feeds.main') }}">
+                             <i class="fa-solid fa-square-rss mx-1"></i>RSS
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a class="nav-link" href="{{ route('feeds.main') }}">
-                             <i class="fa-solid fa-square-rss mx-1"></i>RSS
+                         <a class="nav-link" href="{{ route('show.api') }}">
+                            <i class="fa-brands fa-adn"></i>API
                          </a>
                      </li>
                  </ul>
