@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('address', 255);
             $table->string('website', 255)->nullable();
             $table->string('phone', 30)->nullable();
+            $table->text('story')->nullable();
             $table->string('image')->nullable();
             $table->foreignId('locality_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
 

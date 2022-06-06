@@ -19,6 +19,7 @@ use Database\Seeders\LanguageSeeder;
 use Database\Seeders\LocalitySeeder;
 use Database\Seeders\LocationSeeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\ArtistTypeSeeder;
 use Database\Seeders\RepresentationSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -35,11 +36,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ArtistSeeder::class);
         $this->call(TypeSeeder::class);
+        $this->call(ArtistTypeSeeder::class);
 
-        foreach (Artist::all() as $artist) {
-            $types = Type::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $artist->types()->attach($types);
-        }
+        
+        // foreach (Artist::all() as $artist) {
+        //     $types = Type::inRandomOrder()->take(rand(1, 3))->pluck('id');
+        //     $artist->types()->attach($types);
+        // }
 
         $this->call(LocalitySeeder::class);
         $this->call(LocationSeeder::class);
@@ -55,10 +58,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
 
 
-        foreach (User::all() as $user) {
-            $representations = Representation::inRandomOrder()->take(rand(1, 2))->pluck('id');
-            $user->representations()->attach($representations, ['places' => rand(1, 4)]);
-        }
+        // foreach (User::all() as $user) {
+        //     $representations = Representation::inRandomOrder()->take(rand(1, 2))->pluck('id');
+        //     $user->representations()->attach($representations, ['places' => rand(1, 4)]);
+        // }
 
         User::create([
             'firstname' => 'Michaël',
@@ -67,7 +70,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Michaël Bat.',
             'email' => 'michael.batn@outlook.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('habaligani'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
             'role_id'=>1,
             'language_id' => 1,

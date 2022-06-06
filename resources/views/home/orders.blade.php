@@ -26,7 +26,7 @@
                         <tbody>
                             @foreach ($order->representations as $representation)
                                 <tr>
-                                    <td>{{ $representation->show->title }} {{$representation->show->price }}&euro; (Date: {{ $representation->when->translatedFormat('d M Y') }})</td>
+                                    <td>{{ $representation->show->title }} - (Prix: {{$representation->show->price }}&euro; -- Date du spectacle: {{ $representation->when->translatedFormat('d M Y') }})</td>
                                     <td>x {{$representation->pivot->places }}</td>
                                     <td>{{ round($representation->show->price * $representation->pivot->places,2) }}&euro;</td>
                                 </tr>

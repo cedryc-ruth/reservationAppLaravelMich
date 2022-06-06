@@ -1,19 +1,19 @@
 @extends('layouts.master')
 @section('content')
     <!-- Start Banner Area -->
-    {{ Breadcrumbs::render('artiste', $artist) }}
+    {{ Breadcrumbs::render('location', $location) }}
     <!-- End Banner Area -->
 
     <!--================Single Artist Area =================-->
     <div class="product_image_area">
         <div class="container">
             <div class="d-flex justify-content-center mb-5">
-                <a href="{{ route('artist.index') }}" class="btn btn-info">Retour à l'index</a>
+                <a href="{{ route('location.index') }}" class="btn btn-info">Retour à l'index</a>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-6 text-center">
                     <div class="section-title">
-                        <h2>Artiste</h2>
+                        <h2>{{ $location->designation }}</h2>
                     </div>
                 </div>
             </div>
@@ -21,29 +21,27 @@
                 <div class="col-lg-6 my-2">
 
                     <div class="single-prd-item">
-                        <img class="img-fluid" src="{{ Voyager::image($artist->image) }}" alt="Image de l'artiste">
+                        <img class="img-fluid" src="{{ Voyager::image($location->image) }}" alt="Image de l'artiste">
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1">
                     <div class="s_product_text">
-                        <h3 class="text-lead">{{ $artist->firstname }} {{ $artist->lastname }}</h3>
+                        <h4>Liste des spectacles joués dans ce lieu: </h4>
                         <ul class="my-3">
-                            @foreach ($artist->types as $type)
+                            @foreach ($location->representations as $representation)
                                 <li class="">
-                                    <h4><i class="fa-regular fa-circle mx-2"></i>{{ $type->type }}</h4>
+                                    <h4><a href="{{ route('show.show', $representation->show->slug) }}"><i class="fa-regular fa-circle mx-2"></i>{{ $representation->show->title }}</a></h4>
                                 </li>
                             @endforeach
                         </ul>
-                        {{-- <p></p> --}}
-                        {{-- <h3>Spectacles liés: </h3>
-                        <ul class="my-2">
-                            @foreach ($artist_type as $item)
-                                @foreach ($item->shows as $show)
-                                    <li><h4><i class="fa-regular fa-circle mx-2"></i>{{ $show->title }}</h4></li>
-                                @endforeach
+                        <h4>Liste des spectacles répétés dans ce lieu: </h4>
+                        <ul class="my-3">
+                            @foreach ($location->shows as $show)
+                                <li class="">
+                                    <h4><a href="{{ route('show.show', $show->slug) }}"><i class="fa-regular fa-circle mx-2"></i>{{ $show->title }}</a></h4>
+                                </li>
                             @endforeach
-
-                        </ul> --}}
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -54,8 +52,8 @@
     <!--================Artist Description Area =================-->
     <section class="product_description_area">
         <div class="container mt-4">
-            <h2 class="text-center mb-4">Bio</h2>
-            <p>{{ $artist->bio }}</p>
+            <h2 class="text-center mb-4">Petite histoire</h2>
+            <p>{{ $location->story }}</p>
         </div>
     </section>
     <!--================End Artist Description Area =================-->

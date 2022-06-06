@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Show;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ArtistTypeShow extends Model
 {
@@ -13,4 +14,11 @@ class ArtistTypeShow extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
     protected $table = 'artist_type_show';
+
+
+    public function showId()
+    {
+        return $this->belongsToMany(Show::class);
+    }
+
 }

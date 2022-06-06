@@ -72,6 +72,7 @@ class CheckoutController extends Controller
                     'paiement_city'=>$request->city,
                     'paiement_postalcode'=>$request->postalcode,
                     'discount'=> session()->get('coupon')['name'] ?? null,
+                    'paiement_tax' => Cart::tax(),
                     'paiement_total'=> session()->has('coupon') ? round(Cart::total() - session()->get('coupon')['discount'], 2) : Cart::total() ,
 
                 ]);
@@ -101,7 +102,7 @@ class CheckoutController extends Controller
         // Si aucune session 'success' donc un processus de commande n'existe pas, on rédirige vers la page index des spectacles
 
         if (!session()->has('success')) {
-            return redirect()->route('spectacles');
+            return redirect()->route('show.index');
         }
 
         // On enregistre les lignes de commande du panier du client dans la table representation_user avant de detruire le panier

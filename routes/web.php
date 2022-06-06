@@ -12,6 +12,9 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\LocalityController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,8 +84,23 @@ Route::group(['prefix' => 'admin'], function () {
 
 // Artist routes
 
-Route::get('/artist', [ArtistController::class,'index'])->name('artist.index');
-Route::get('/artist/{artist}/show', [ArtistController::class,'show'])->name('artist.show');
+Route::resource('artist',ArtistController::class);
+
+// Type routes
+
+Route::resource('type',TypeController::class);
+
+// Location routes
+
+Route::resource('location',LocationController::class);
+
+
+// Locality routes
+
+
+Route::resource('locality',LocalityController::class);
+
+
 
 
 // Authentification routes

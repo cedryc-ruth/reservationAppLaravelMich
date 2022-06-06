@@ -15,9 +15,9 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 
 // Home > import
 
-Breadcrumbs::for('import',function(BreadcrumbTrail $trail){
+Breadcrumbs::for('import', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('Import',route('importForm'));
+    $trail->push('Import', route('importForm'));
 });
 
 // Home > Contact
@@ -40,8 +40,17 @@ Breadcrumbs::for('artistes', function (BreadcrumbTrail $trail) {
 
 Breadcrumbs::for('artiste', function (BreadcrumbTrail $trail, $artist) {
     $trail->parent('artistes');
-    $trail->push($artist->firstname.' '.$artist->lastname, route('artist.index',$artist->id));
+    $trail->push($artist->firstname.' '.$artist->lastname, route('artist.index', $artist->id));
 });
+
+// Home > Types
+
+Breadcrumbs::for('types', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Artistes Par Type', route('type.index'));
+});
+
+
 
 // Home > Spectacles
 Breadcrumbs::for('spectacles', function (BreadcrumbTrail $trail) {
@@ -52,8 +61,40 @@ Breadcrumbs::for('spectacles', function (BreadcrumbTrail $trail) {
 // Spectacles > Representation (dynamique)
 Breadcrumbs::for('representation', function (BreadcrumbTrail $trail, $show) {
     $trail->parent('spectacles');
-    $trail->push($show->title, route('show.show',$show->slug));
+    $trail->push($show->title, route('show.show', $show->slug));
 });
+
+
+
+// Home > Locations
+
+Breadcrumbs::for('locations', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Lieux', route('location.index'));
+});
+
+// Home > Locations > Salle
+Breadcrumbs::for('location', function (BreadcrumbTrail $trail, $location) {
+    $trail->parent('locations');
+    $trail->push($location->designation, route('location.show', $location->slug));
+});
+
+// Home > Localités
+
+Breadcrumbs::for('localites', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Localites', route('locality.index'));
+});
+
+// Home > Localités > locality
+
+Breadcrumbs::for('localite', function (BreadcrumbTrail $trail,$locality) {
+    $trail->parent('localites');
+    $trail->push($locality->locality, route('locality.show',$locality->id));
+});
+
+
+
 
 // Home > Commandes
 Breadcrumbs::for('commandes', function (BreadcrumbTrail $trail) {
@@ -112,5 +153,3 @@ Breadcrumbs::for('verification', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Verification', route('email.verify'));
 });
-
-

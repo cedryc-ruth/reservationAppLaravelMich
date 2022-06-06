@@ -10,7 +10,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 text-center">
                     <div class="section-title">
-                        <h2>Spectacle</h2>
+                        <h2>{{ $show->title }}</h2>
                     </div>
                 </div>
             </div>
@@ -43,30 +43,28 @@
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1">
-
-                    <h3 class="mb-4">{{ $show->title }}</h3>
-                    <h6 class="mb-5"><i class="fa-solid fa-wand-magic-sparkles mx-2"></i>Lieu de création et de
+                    <h5 class="mb-5"><i class="fa-solid fa-wand-magic-sparkles mx-2"></i>Lieu de création et de
                         répétition:
-                        {{ $show->location->designation }} </h6>
+                        {{ $show->location->designation }} </h5>
 
                     <h2 class="mb-5">Prix: {{ $show->price }} &euro; </h2>
-                    <h6 class="mb-5"><i class="fa-solid fa-ticket mx-1"></i>Reservable:
-                        {{ $show->bookable ? 'Oui' : 'Non' }}</h6>
-                    <h6 class="mb-5"><i class="fa-solid fa-film mx-1"></i>Salle de représentation:
-                        {{ $representation->location->designation }} </h6>
-                    <h6 class="mb-5"><i class="fa-solid fa-location-dot mx-1"></i>Adresse de représentation:
+                    <h5 class="mb-5"><i class="fa-solid fa-ticket mx-1"></i>Reservable:
+                        {{ $show->bookable ? 'Oui' : 'Non' }}</h5>
+                    <h5 class="mb-5"><i class="fa-solid fa-film mx-1"></i>Salle de représentation:
+                        {{ $representation->location->designation }} </h5>
+                    <h5 class="mb-5"><i class="fa-solid fa-location-dot mx-1"></i>Adresse de représentation:
                         {{ $representation->location->address }}
                         ,
                         {{ $representation->location->locality->postal_code }}
-                        {{ $representation->location->locality->locality }}</h6>
+                        {{ $representation->location->locality->locality }}</h5>
 
                     <form action="{{ route('cart.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="show_id" value="{{ $show->id }}">
                         <div class="form-group mb-5">
                             <label for="representation_id" class="form-label">
-                                <h6 class=""><i class="fa-solid fa-calendar-days mx-1"></i>Choisissez une
-                                    date de représentation: </h6>
+                                <h5 class=""><i class="fa-solid fa-calendar-days mx-1"></i>Choisissez une
+                                    date de représentation: </h5>
                             </label>
                             <select class="form-select mb-5" id="representation_id" name="representation_id">
                                 @foreach ($show->representations as $representation)
@@ -81,9 +79,9 @@
                         </div>
                         <div class="form-group mb-5">
                             <label for="qty" class="form-label">
-                                <h6 class=""><i class="fa-solid fa-chair mx-2"></i></i>Choisir
+                                <h5 class=""><i class="fa-solid fa-chair mx-2"></i></i>Choisir
                                     le
-                                    nombre de places à réserver </h6>
+                                    nombre de places à réserver </h5>
                             </label>
                             <select name="qty" id="qty" class="form-select mb-3">
                                 @for ($i = 1; $i <= 6; $i++)

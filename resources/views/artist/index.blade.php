@@ -12,13 +12,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             @foreach ($artists as $artist)
                 <div class="col-md-4 my-2">
                     <div class="card gcard h-100 my-2" style="width: 18rem;">
                         <img src="{{ Voyager::image($artist->image) }}" class="card-img-top" alt="Photo artiste">
                         <div class="card-body mt-2">
-                            <h5 class="card-title">{{ $artist->firstname }}</h5>
+                            <h5 class="card-title">{{ $artist->firstname }} {{ $artist->lastname }}</h5>
                             <p class="card-text">
                                 <ul>
                                     @foreach ($artist->types as $type)

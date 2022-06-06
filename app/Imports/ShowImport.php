@@ -19,7 +19,7 @@ class ShowImport implements ToModel, WithHeadingRow
         return new Show([
              'title' => $row['title'],
              'slug' => $row['slug'],
-             'subtitle' => $row['subtitle'],
+             'summary' => $row['summary'],
              'poster_url' => $row['poster_url'],
              'images' => $row['images'],
              'bookable' => $row['bookable'],

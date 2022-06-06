@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                 <div class="section-title">
-                    <h1>Spectacles à l'affiche</h1>
+                   <a href="{{ route('show.index') }}"><h1>Liste des spectacles</h1></a>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
                 </form>
             </div>
         </div> --}}
-        <div class="row">
+        <div class="row justify-content-center">
             @foreach ($shows as $show)
                 <div class="col-md-4">
                     <div class="card h-100 text-center">

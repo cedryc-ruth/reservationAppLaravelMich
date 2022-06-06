@@ -14,8 +14,8 @@ class ShowExport implements FromCollection,WithHeadings
         return [
             'Id',
             'Title',
-            'slug',
-            'Subtitle',
+            'Slug',
+            'Summary',
             'poster_url',
             'images',
             'Bookable',

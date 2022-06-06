@@ -54,7 +54,7 @@ class Show extends Model
 
     public static function getShow()
     {
-        $records =  DB::table('shows')->select('id', 'title', 'slug', 'subtitle', 'poster_url', 'images', 'bookable', 'price', 'description', 'location_id')
+        $records =  DB::table('shows')->select('id', 'title', 'slug', 'summary', 'poster_url', 'images', 'bookable', 'price', 'description', 'location_id')
                                       ->get()->toArray();
         return $records;
     }

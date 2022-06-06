@@ -71,7 +71,7 @@
                              <a href="{{ route('artist.index') }}" class="nav-link">
                                  <i class="fa-solid fa-people-group mx-1"></i>Artistes par nom
                              </a>
-                             <a href="#" class="nav-link">
+                             <a href="{{ route('type.index') }}" class="nav-link">
                                  <i class="fa-solid fa-pen-fancy mx-1"></i>Artistes par type
                              </a>
                          </div>
@@ -79,14 +79,14 @@
                      <li class="nav-item dropdown">
                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                              data-toggle="dropdown" aria-expanded="false">
-                             <i class="fa-solid fa-caret-down mx-1"></i>Salles
+                             <i class="fa-solid fa-caret-down mx-1"></i>Lieux Et Localités
                          </a>
                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                             <a href="#" class="nav-link">
-                                 <i class="fa-solid fa-house mx-1"></i>Salles par nom
+                             <a href="{{ route('location.index') }}" class="nav-link">
+                                 <i class="fa-solid fa-house mx-1"></i>Lieux (salles)
                              </a>
-                             <a href="#" class="nav-link">
-                                 <i class="fa-solid fa-location-arrow mx-1"></i>Salles par lieu
+                             <a href="{{ route('locality.index') }}" class="nav-link">
+                                 <i class="fa-solid fa-location-arrow mx-1"></i>Localités
                              </a>
                          </div>
                      </li>

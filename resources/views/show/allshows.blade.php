@@ -48,9 +48,9 @@
                 <tr>
                     <td>{{ $show->id }}</td>
                     <td>{{ $show->title }}</td>
-                    <td>{{ $show->subtitle }}</td>
+                    <td>{{ $show->summary }}</td>
                     <td>{{ $show->bookable }}</td>
-                    <td>{{ $show->price }}</td>
+                    <td>{{ $show->price }}&euro;</td>
                 </tr>
             @endforeach
         </tbody>
