@@ -13,8 +13,14 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('show.index'));
 });
 
-// Home > import
+// Home > contact
+Breadcrumbs::for('contact', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Contact', route('show.contact'));
+});
 
+
+// Home > import
 Breadcrumbs::for('import', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Import', route('importForm'));

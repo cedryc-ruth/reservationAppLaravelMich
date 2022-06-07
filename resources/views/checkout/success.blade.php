@@ -75,7 +75,7 @@
                             @endforeach
                             <tr>
                                 <td>
-                                    <h4>Montant total payé</h4>
+                                    <h4>Montant total payé (avec taxe)</h4>
                                 </td>
                                 <td>
                                     <h5></h5>

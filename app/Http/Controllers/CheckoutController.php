@@ -38,6 +38,22 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'postalcode' => 'required'
+        ],[
+            'firstname.required' => 'Veuillez indiquer votre prénom',
+            'lastname.required' => 'Veuillez indiquer votre nom',
+            'phone.required' => 'Veuillez indiquer votre numéro de téléphone',
+            'address.required' => 'Veuillez indiquer votre adresse',
+            'city.required' => 'Veuillez indiquer votre ville',
+            'postalcode.required' => 'Veuillez indiquer votre code postal',
+            
+        ]);
         $authed_user = auth()->user();
         $amount = Cart::total() * 100;
         $payment = $request->payment_method;

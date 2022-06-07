@@ -23,33 +23,54 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="firstname" name="firstname">
-                                    <span class="placeholder" data-placeholder="Prénom"></span>
+                                    <input type="text" class="form-control" id="firstname" name="firstname"
+                                        placeholder="Votre prénom" value="{{ auth()->user()->firstname }}">
+                                    @error('firstname')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="lastname" name="lastname">
-                                    <span class="placeholder" data-placeholder="Nom"></span>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" id="lastname" name="lastname"
+                                        placeholder="Votre nom" value="{{ auth()->user()->lastname }}">
+                                    @error('lastname')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
-                                <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="number" name="phone">
-                                    <span class="placeholder" data-placeholder="Numéro de téléphone ou de GSM"></span>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" id="number" name="phone"
+                                        placeholder="Numéro de Tél ou GSM">
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="col-md-6 form-group p_star">
-                                    <input type="text" class="form-control" id="email" name="email">
-                                    <span class="placeholder" data-placeholder="Email"></span>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                        value="{{ auth()->user()->email }}">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="add" name="address">
-                                    <span class="placeholder" data-placeholder="Adresse"></span>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" class="form-control" id="add" name="address"
+                                        placeholder="Votre adresse">
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="city" name="city">
-                                    <span class="placeholder" data-placeholder="Ville"></span>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" class="form-control" id="city" name="city"
+                                        placeholder="Votre Ville">
+                                    @error('city')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="zip" name="postalcode">
-                                    <span class="placeholder" data-placeholder="Code Postal"></span>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" class="form-control" id="zip" name="postalcode"
+                                        placeholder="Votre Code Postal">
+                                    @error('postalcode')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card ">

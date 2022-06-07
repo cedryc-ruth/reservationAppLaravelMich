@@ -248,4 +248,9 @@ class ShowController extends Controller
     {
         return view('show.api');
     }
+
+    public function contact()
+    {
+        return view('show.contact');
+    }
 }

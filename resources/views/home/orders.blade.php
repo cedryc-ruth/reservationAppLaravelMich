@@ -32,12 +32,12 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td><b>TVA</b></td>
+                                <td><b>Taxe</b></td>
                                 <td></td>
-                                <td>21 &euro;</td>
+                                <td>{{ $order->paiement_tax}}&euro;</td>
                             </tr>
                             <tr>
-                                <td><b>TOTAL AVEC TVA</b></td>
+                                <td><b>TOTAL TTC</b></td>
                                 <td></td>
                                 <td><strong>{{ round($order->paiement_total,2) }}&euro;</strong></td>
                             </tr>

@@ -100,7 +100,12 @@
                      </li>
                      <li class="nav-item">
                          <a class="nav-link" href="{{ route('show.api') }}">
-                            <i class="fa-brands fa-adn"></i>API
+                            <i class="fa-brands fa-adn mx-1"></i>API
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{{ route('show.contact') }}">
+                            <i class="fa-regular fa-envelope mx-1"></i>Contact
                          </a>
                      </li>
                  </ul>

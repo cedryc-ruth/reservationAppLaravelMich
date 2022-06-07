@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\TypeController;
 
 /*
@@ -169,3 +170,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
     Route::post('password/reset', [ResetPasswordController::class,'reset'])->name('password.update');
 });
+
+
+
+// Mail & Contact routes
+
+Route::get('/contact',[ShowController::class,'contact'])->name('show.contact');
+Route::post('/send-email',[MailController::class,'sendMail'])->name('show.mailing');
