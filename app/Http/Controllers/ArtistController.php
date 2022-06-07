@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->except('index','show');  // On applique un middleware pour eviter qu'une personne mal intentionnée
+        // puisse effectuer des opération de destroy & update à travers l'url
+    }
     /**
      * Display a listing of the resource.
      *

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->except('index', 'show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,7 @@ class LocationController extends Controller
     {
         $locations =  Location::paginate(3);
 
-        return view('location.index',compact('locations'));
+        return view('location.index', compact('locations'));
     }
 
     /**
@@ -49,10 +53,9 @@ class LocationController extends Controller
      */
     public function show($slug)
     {
-        $location = Location::where('slug',$slug)->firstOrfail();
+        $location = Location::where('slug', $slug)->firstOrfail();
 
-        return view('location.show',compact('location'));
-
+        return view('location.show', compact('location'));
     }
 
     /**

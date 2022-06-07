@@ -31,9 +31,8 @@ class HomeController extends Controller
     //     $user->email =$request->email;
     // }
 
-    public function changePasswordPost(Request $request)  // fonction pour changer le mot de passe 
+    public function changePasswordPost(Request $request)  // fonction pour changer le mot de passe
     {
-
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
             // Si les deux mots de passe se ressemblent
             return redirect()->back()->with("error", "Le mot de passe saisi ne correspond pas à votre de passe actuel");
@@ -49,7 +48,7 @@ class HomeController extends Controller
         $request->validate([
             'current-password' => 'required',
             'new-password' => 'required|string|min:8|confirmed',
-        ],[
+        ], [
             'current-password.required' => 'Veuillez saisir votre mot de passe actuel.',
             'new-password.required' => 'Veuillez saisir votre nouveau mot de passe.',
             'new-password.string' => 'Votre nouveau mot de passe doit être composé par des caractères alphanumériques.',
@@ -70,6 +69,6 @@ class HomeController extends Controller
     {
         $user = auth()->user();  // Récupération de l'utilisateur authentifié
         $orders = $user->orders;  // On récupère les commandes associées à ce user.
-        return view('home.orders',compact('orders'));
+        return view('home.orders', compact('orders'));
     }
 }

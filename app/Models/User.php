@@ -24,12 +24,17 @@ class User extends VoyagerUser implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'language_id',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'language_id',
+    //     'role_id'
+    // ];
+
+
+    protected $guarded = [];
+
 
     /**
      * The attributes that should be hidden for serialization.

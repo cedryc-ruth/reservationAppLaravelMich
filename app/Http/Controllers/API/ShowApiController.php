@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class ShowApiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->except('index', 'show','search');
+    }
     /**
      * Display a listing of the resource.
      *

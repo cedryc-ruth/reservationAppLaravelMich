@@ -244,7 +244,7 @@ class ShowController extends Controller
         return redirect()->back()->with('success', 'L\'importation s\'est bien déroulée'); // Si import est un succès
     }
 
-    public function getApi()
+    public function getApi()  // Retourne une page où l'on explique le fonctionnement de notre api
     {
         return view('show.api');
     }

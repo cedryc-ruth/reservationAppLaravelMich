@@ -34,25 +34,28 @@ use App\Http\Controllers\TypeController;
 Route::get('/', [ShowController::class,'index'])->name('show.index');
 Route::get('/show/{show}', [ShowController::class,'show'])->name('show.show');
 Route::get('/search', [ShowController::class,'search'])->name('show.search');
-Route::get('/search-by-date',[ShowController::class,'searchByDate'])->name('show.searchbydate');
-Route::get('/search-by-price',[ShowController::class,'searchByPrice'])->name('show.searchbyprice');
-Route::get('/contact', [ShowController::class,'contact'])->name('show.contact');
-
-// Export shows in Excel or CSV
-
-Route::get('/export-excel',[ShowController::class,'exportIntoExcel'])->name('exportExcel');
-Route::get('/export-csv',[ShowController::class,'exportIntoCSV'])->name('exportCSV');
-
-// Export shows in PDF
-
-// Route::get('/all-view',[ShowController::class,'getAllshow'])->name('allView');
-Route::get('/export-pdf',[ShowController::class,'downloadPDF'])->name('downloadPDF');
+Route::get('/search-by-date', [ShowController::class,'searchByDate'])->name('show.searchbydate');
+Route::get('/search-by-price', [ShowController::class,'searchByPrice'])->name('show.searchbyprice');
 
 
-// Import shows in Excel or CSV
 
-Route::get('/import-form',[ShowController::class,'importForm'])->name('importForm');
-Route::post('/import',[ShowController::class,'import'])->name('import');
+Route::group(['prefix'=>'admin','middleware' =>['isAdmin','auth']], function () {
+    // Export shows in Excel or CSV
+
+    Route::get('/export-excel', [ShowController::class,'exportIntoExcel'])->name('exportExcel');
+    Route::get('/export-csv', [ShowController::class,'exportIntoCSV'])->name('exportCSV');
+
+    // Export shows in PDF
+
+    // Route::get('/all-view',[ShowController::class,'getAllshow'])->name('allView');
+    Route::get('/export-pdf', [ShowController::class,'downloadPDF'])->name('downloadPDF');
+
+    // Import shows in Excel or CSV
+
+    Route::get('/import-form', [ShowController::class,'importForm'])->name('importForm');
+    Route::post('/import', [ShowController::class,'import'])->name('import');
+});
+
 
 // Flux RSS route
 
@@ -60,10 +63,10 @@ Route::post('/import',[ShowController::class,'import'])->name('import');
 Route::get('feed', FeedController::class)->name("feeds.main");
 
 
-// Api
+// Route de la page qui explique l'utilisation de notre api
 
 
-Route::get('api',[ShowController::class,'getApi'])->name("show.api");
+Route::get('api', [ShowController::class,'getApi'])->name("show.api");
 
 
 // Cart page routes
@@ -73,49 +76,51 @@ Route::post('/cart/store', [CartController::class,'store'])->name('cart.store');
 Route::delete('/cart/{show}/destroy', [CartController::class,'destroy'])->name('cart.destroy');
 
 
-// Checkout routes
+// Checkout routes  (Le middleware "auth" appliqué dans le constructeur du contrôleur)
 
 Route::get('/checkout', [CheckoutController::class,'index'])->name('checkout.index');
 Route::post('/checkout/store', [CheckoutController::class,'store'])->name('checkout.store');
 Route::get('/checkout/success', [CheckoutController::class,'success'])->name('checkout.success');
 
 
-// Voyager TCG routes 
+// Voyager TCG routes
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware' =>['auth']], function () {
     Voyager::routes();
 });
 
 
 // Artist routes
 
-Route::resource('artist',ArtistController::class);
+Route::resource('artist', ArtistController::class);
 
 // Artistes externes route  via l'api  du théâtre de la ville de Paris.
 
-Route::get('artist-api',[ArtistViaApiController::class,'index'])->name('artist_api.index');
+Route::get('artist-api', [ArtistViaApiController::class,'index'])->name('artist_api.index');
 
 
 // Type routes
 
-Route::resource('type',TypeController::class);
+Route::resource('type', TypeController::class);
 
 // Location routes
 
-Route::resource('location',LocationController::class);
+Route::resource('location', LocationController::class);
 
 
 // Locality routes
 
 
-Route::resource('locality',LocalityController::class);
+Route::resource('locality', LocalityController::class);
 
 
 
 
 // Authentification routes
 
+
 Auth::routes(['verify' => true]);
+
 
 
 // Register routes
@@ -136,9 +141,9 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-// Only authenticated person can access this group 
+// Only authenticated person can access this group
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => 'auth'], function () {
 
     //only verified account can access with this group
 
@@ -154,7 +159,6 @@ Route::group(['middleware' => ['auth']], function () {
         // Change password in home page
 
         Route::post('/changePassword', [HomeController::class, 'changePasswordPost'])->name('changePasswordPost');
-
     });
 });
 

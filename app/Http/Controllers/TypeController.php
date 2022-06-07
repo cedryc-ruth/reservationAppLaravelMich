@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->except('index', 'show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::paginate(3);
-        return view('type.index',compact('types'));
+        return view('type.index', compact('types'));
     }
 
     /**
