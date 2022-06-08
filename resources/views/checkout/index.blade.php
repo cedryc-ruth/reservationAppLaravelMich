@@ -116,7 +116,7 @@
                                 <li><a href="#">Total <span>{{ Cart::total() }}&euro;</span></a></li>
                             </ul>
                         </div>
-                        <div class="coupon my-3">
+                        {{-- <div class="coupon my-3">
                             <div class="code">
                                 <p>Have a code?</p>
                                 <form action="#" method="POST">
@@ -130,7 +130,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
