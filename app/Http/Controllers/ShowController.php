@@ -228,12 +228,12 @@ class ShowController extends Controller
     public function import(Request $request)
     {
         $request->validate([   // Contrôle de règles de validation
-            'file' => 'required|file|max:1024|mimes:csv,xls,xlsx'
+            'file' => 'required|file|max:1024'
         ], [
             'file.required' => 'Aucun fichier chargé!',
             'file.file' =>'Vous devez charger un fichier!',
             'file.max' => 'Votre fichier dépasse 1024 MB',
-            'file.mimes' => 'Votre fichier doit être de type csv,xlsx,xls'
+            // 'file.mimes' => 'Votre fichier doit être de type csv,xlsx,xls'
         ]);
 
         $import = Excel::import(new ShowImport, $request->file);

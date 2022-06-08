@@ -40,7 +40,7 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-header text-center">
-                            <h4>Import de spectacles</h4>
+                            <h4>Importez des spectacles</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
