@@ -19,7 +19,6 @@ Breadcrumbs::for('contact', function (BreadcrumbTrail $trail) {
     $trail->push('Contact', route('show.contact'));
 });
 
-
 // Home > import
 Breadcrumbs::for('import', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
@@ -165,3 +164,6 @@ Breadcrumbs::for('verification', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Verification', route('email.verify'));
 });
+
+
+

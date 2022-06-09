@@ -16,6 +16,6 @@ class Locality extends Model
 
     public function locations()
     {
-        return $this->hasMany(Location::class); // Dans une localité , on peut retrouver un ou plusieurs locations.
+        return $this->hasMany(Location::class); // Une localité donnée (une occurence) peut abriter plusieurs locations.
     }
 }
