@@ -90,7 +90,8 @@
                                     <div class="d-flex justify-content-center">
                                         <button class="btn btn-info" type="submit" id="submit-button"><i
                                                 class="fa-solid fa-money-check mx-1"></i>
-                                            Procéder au paiement ({{ Cart::total() }} &euro; )</button>
+                                            Procéder au paiement ({{ Cart::total() }} &euro; )
+                                        </button>
                                     </div>
                                 </div>
                             </div>

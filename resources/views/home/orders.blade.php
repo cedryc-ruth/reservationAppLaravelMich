@@ -11,7 +11,7 @@
                     <div class="d-flex justify-content-between my-5 px-5">
                         <h4>
                             <i class="fas fa-receipt"></i>
-                            Commande #{{ $order->id }}
+                            Commande #com-00XY-{{ $order->id }}
                         </h4>
                         <h4>Date: {{ $order->created_at->translatedFormat('d M Y') }}</h4>
                     </div>

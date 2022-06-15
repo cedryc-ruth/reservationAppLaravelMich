@@ -47,7 +47,7 @@
                         @method("PUT")
                         <div class="form-group">
                             <label for="name">Votre nom et prenom</label>
-                            <input type="text" class="form-control" id="name" value="{{ $user->name }}">
+                            <input type="text" class="form-control disabled" id="name" value="{{ $user->name }}" disabled>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong class="text-danger">{{ $message }}</strong>
@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <label for="email">Votre adresse e-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                            <input type="email" class="form-control disabled" id="email" name="email" value="{{ $user->email }}" disabled>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong class="text-danger">{{ $message }}</strong>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="form-group">
                             <label for="language_id" class="form-label">Votre langue préférée</label>
-                            <select class="form-select" name="language_id" id="language_id">
+                            <select class="form-select disabled" name="language_id" id="language_id" disabled>
                                 @foreach ($languages as $language)
                                     <option value="{{ $language->id }}"
                                         {{ $language->id === $user->language->id ? 'selected' : '' }}>
@@ -77,7 +77,7 @@
                                 <strong class="text-danger">{{ $message }}</strong>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4">Mettre à jour</button>
+                        <button type="submit" class="btn btn-primary mt-4" disabled>Mettre à jour</button>
                     </form>
                 </div>
                 <div class="col-md-6">

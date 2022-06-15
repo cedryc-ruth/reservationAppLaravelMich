@@ -160,10 +160,7 @@ Breadcrumbs::for('enregistrement', function (BreadcrumbTrail $trail) {
     $trail->push('Enregistrement', route('register'));
 });
 
-Breadcrumbs::for('verification', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Verification', route('email.verify'));
-});
+
 
 
 
