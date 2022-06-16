@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Location;
 use App\Models\Representation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,11 @@ class Room extends Model
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function locationId() 
+    {
+        return $this->hasMany(Location::class);
     }
 
     //Examen : Une salle de spectacle acceuille plusieurs representations

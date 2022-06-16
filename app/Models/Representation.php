@@ -44,6 +44,10 @@ class Representation extends Model
     //     return $this->belongsTo(Location::class);
     // }
 
+    public function roomId(){
+        return $this->hasMany(Room::class);
+    }
+
     public function orders()
     {
         // return $this->belongsToMany(Order::class,'order_representations','order_id','representation_id');

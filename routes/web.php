@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TypeController;
 
 /*
@@ -113,6 +114,11 @@ Route::resource('location', LocationController::class);
 
 
 Route::resource('locality', LocalityController::class);
+
+
+// Room routes
+
+Route::resource('room', RoomController::class);
 
 
 

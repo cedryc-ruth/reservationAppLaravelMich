@@ -93,6 +93,20 @@
                              </a>
                          </div>
                      </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-caret-down mx-1"></i>Salles
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="{{ route('room.index') }}" class="nav-link">
+                                <i class="fa-solid fa-house mx-1"></i>Salles
+                            </a>
+                            {{-- <a href="{{ route('locality.index') }}" class="nav-link">
+                                <i class="fa-solid fa-location-arrow mx-1"></i>Localités
+                            </a> --}}
+                        </div>
+                    </li>
                      <li class="nav-item">
                          <a class="nav-link" href="{{ route('feeds.main') }}">
                              <i class="fa-solid fa-square-rss mx-1"></i>RSS

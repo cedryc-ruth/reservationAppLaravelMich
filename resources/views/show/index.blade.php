@@ -11,7 +11,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                 <div class="section-title">
-                   <a href="{{ route('show.index') }}"><h1>Liste des spectacles</h1></a>
+                    <a href="{{ route('show.index') }}">
+                        <h1>Liste des spectacles</h1>
+                    </a>
                 </div>
             </div>
         </div>
@@ -57,7 +59,8 @@
                                     class="fa-solid fa-arrow-down"></i></a>
                             <form action="{{ route('show.searchbyprice') }}" class="d-flex align-items-center"
                                 method="GET">
-                                <input type="number" name="price1" class="form-control p-1 mx-2" min="5" value="5">
+                                <input type="number" name="price1" class="form-control p-1 mx-2" min="5"
+                                    value="5">
                                 <input type="number" name="price2" class="form-control p-1" min="10" value="10">
                                 <h4 class="mx-1">&euro;</h4>
                                 <button type="submit" class="btn btn-info mx-1"><i
@@ -106,8 +109,7 @@
             @foreach ($shows as $show)
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
-                        <img src="{{ Voyager::image($show->poster_url) }}" alt="Image d'un show"
-                            class="card-img-top" />
+                        <img src="{{ Voyager::image($show->poster_url) }}" alt="Image d'un show" class="card-img-top" />
                         <div class="card-body">
                             <h5 class="card-title">{{ $show->title }}</h5>
                             <p class="card-text">{{ $show->subtitle }}</p>
@@ -124,9 +126,9 @@
                             <p><i class="fa-solid fa-film mx-1"></i>Salle(s) de spectacle:
                             <ul>
                                 @foreach ($show->representations as $representation)
-                                    {{-- <li><span> --}}
-                                            {{-- class="{{ $representation->when < new DateTime(now()) ? 'txt-deco' : '' }}">{{ $representation->location->designation }}</span> --}}
-                                    {{-- </li> --}}
+                                    <li><span
+                                            class="{{ $representation->when < new DateTime(now()) ? 'txt-deco' : '' }}"></span>{{ $representation->room->location->designation }} / Salle : {{ $representation->room->name }}</span>
+                                    </li>
                                 @endforeach
                             </ul>
                             </p>
