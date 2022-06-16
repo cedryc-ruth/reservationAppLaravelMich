@@ -24,6 +24,13 @@
                              </li>
                          @endif
                          @if (Auth::user()->hasRole('admin'))
+                             <li class="nav-item">
+                                 <a class="nav-link" href="{{ route('representation.index') }}" target="_blank">
+                                     <i class="fa-solid fa-briefcase"></i> Représentations
+                                 </a>
+                             </li>
+                         @endif
+                         @if (Auth::user()->hasRole('admin'))
                              <div class="dropdown">
                                  <button class="btn btn-success btn-sm dropdown-toggle mx-2" type="button"
                                      id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -75,7 +82,7 @@
                                  <i class="fa-solid fa-pen-fancy mx-1"></i>Artistes par type
                              </a>
                              <a href="{{ route('artist_api.index') }}" class="nav-link">
-                                <i class="fa-solid fa-earth-europe mx-1"></i>Artistes externes
+                                 <i class="fa-solid fa-earth-europe mx-1"></i>Artistes externes
                              </a>
                          </div>
                      </li>
@@ -94,19 +101,19 @@
                          </div>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-caret-down mx-1"></i>Salles
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a href="{{ route('room.index') }}" class="nav-link">
-                                <i class="fa-solid fa-house mx-1"></i>Salles
-                            </a>
-                            {{-- <a href="{{ route('locality.index') }}" class="nav-link">
+                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                             data-toggle="dropdown" aria-expanded="false">
+                             <i class="fa-solid fa-caret-down mx-1"></i>Salles
+                         </a>
+                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                             <a href="{{ route('room.index') }}" class="nav-link">
+                                 <i class="fa-solid fa-house mx-1"></i>Salles
+                             </a>
+                             {{-- <a href="{{ route('locality.index') }}" class="nav-link">
                                 <i class="fa-solid fa-location-arrow mx-1"></i>Localités
                             </a> --}}
-                        </div>
-                    </li>
+                         </div>
+                     </li>
                      <li class="nav-item">
                          <a class="nav-link" href="{{ route('feeds.main') }}">
                              <i class="fa-solid fa-square-rss mx-1"></i>RSS
@@ -114,12 +121,12 @@
                      </li>
                      <li class="nav-item">
                          <a class="nav-link" href="{{ route('show.api') }}">
-                            <i class="fa-brands fa-adn mx-1"></i>API
+                             <i class="fa-brands fa-adn mx-1"></i>API
                          </a>
                      </li>
                      <li class="nav-item">
                          <a class="nav-link" href="{{ route('show.contact') }}">
-                            <i class="fa-regular fa-envelope mx-1"></i>Contact
+                             <i class="fa-regular fa-envelope mx-1"></i>Contact
                          </a>
                      </li>
                  </ul>
@@ -142,7 +149,8 @@
                      @else
                          <li class="nav-item dropdown">
                              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('home.index') }}"
-                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                 v-pre>
                                  {{ Auth::user()->name }}
                              </a>
 
@@ -156,8 +164,7 @@
                                      <i class="fas fa-sign-out-alt"></i> Se déconnecter
                                  </a>
 
-                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                     class="d-none">
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                      @csrf
                                  </form>
                              </div>

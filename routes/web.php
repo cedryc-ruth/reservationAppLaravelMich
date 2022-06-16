@@ -16,8 +16,10 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TypeController;
+use App\Models\Representation;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +58,16 @@ Route::group(['prefix'=>'admin','middleware' =>['isAdmin','auth']], function () 
 
     Route::get('/import-form', [ShowController::class,'importForm'])->name('importForm');
     Route::post('/import', [ShowController::class,'import'])->name('import');
+
+     // Representations route
+
+     Route::resource('representation', RepresentationController::class);
+
+  
+
 });
+
+
 
 
 // Flux RSS route
@@ -117,6 +128,7 @@ Route::resource('locality', LocalityController::class);
 
 
 // Room routes
+
 
 Route::resource('room', RoomController::class);
 
