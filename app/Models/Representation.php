@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Room;
 use App\Models\Show;
 use App\Models\User;
 use App\Models\Order;
@@ -23,10 +24,10 @@ class Representation extends Model
         return $this->belongsTo(Show::class); // Une occurrence de la représention appartient à un et un seul show
     }
 
-    public function location()
-    {
-        return $this->belongsTo(Location::class); // Une occurrence de la représentation s'est déroule à un et un seul lieux
-    }
+    // public function location()
+    // {
+    //     return $this->belongsTo(Location::class); // Une occurrence de la représentation s'est déroule à un et un seul lieux
+    // }
 
     public function users()
     {
@@ -47,5 +48,12 @@ class Representation extends Model
     {
         // return $this->belongsToMany(Order::class,'order_representations','order_id','representation_id');
         return $this->belongsToMany(Order::class);
+    }
+
+    // Exame Une representation donnée (une occurence ) se déroule dans une et une seule salle de spectacle
+    
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
     }
 }

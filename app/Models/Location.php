@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Room;
 use App\Models\Show;
 use App\Models\Locality;
 use App\Models\Representation;
@@ -34,8 +35,10 @@ class Location extends Model
         return $this->belongsTo(Locality::class); // Une "location" se trouve dans une et une seule locatité.
     }
 
-    public function representations()
+    // Examen: Une location  a plusieurs salles de spectacle.
+    public function rooms()
     {
-        return $this->hasMany(Representation::class);
+        return $this->hasMany(Room::class);
     }
+   
 }

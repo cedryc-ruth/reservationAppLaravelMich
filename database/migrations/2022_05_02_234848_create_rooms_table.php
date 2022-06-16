@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Location;
-use App\Models\Show;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('representations', function (Blueprint $table) {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('when');
-            $table->foreignId('show_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            $table->foreignId('room_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+            $table->string('name');
+            $table->unsignedInteger(4)->default(1);
+            $table->foreignId('location_id')->nullable()->constrained()->restrictOnDelete()->cascadeOnUpdate();
+            // $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('representations');
+        Schema::dropIfExists('rooms');
     }
 };
