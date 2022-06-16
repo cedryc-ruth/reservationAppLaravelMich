@@ -39,10 +39,10 @@ class Representation extends Model
         return $this->belongsTo(Show::class);
     }
 
-    public function locationId()  // Même rôle que showId()
-    {
-        return $this->belongsTo(Location::class);
-    }
+    // public function locationId()  // Même rôle que showId()
+    // {
+    //     return $this->belongsTo(Location::class);
+    // }
 
     public function orders()
     {

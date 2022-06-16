@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LocalitySeeder::class);
         $this->call(LocationSeeder::class);
         $this->call(ShowSeeder::class);
+        $this->call(RoomSeeder::class);
 
         foreach (Show::all() as $show) {
             $artist_types = ArtistType::inRandomOrder()->take(rand(3, 5))->pluck('id');

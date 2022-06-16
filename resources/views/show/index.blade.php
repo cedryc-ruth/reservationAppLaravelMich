@@ -124,9 +124,9 @@
                             <p><i class="fa-solid fa-film mx-1"></i>Salle(s) de spectacle:
                             <ul>
                                 @foreach ($show->representations as $representation)
-                                    <li><span
-                                            class="{{ $representation->when < new DateTime(now()) ? 'txt-deco' : '' }}">{{ $representation->location->designation }}</span>
-                                    </li>
+                                    {{-- <li><span> --}}
+                                            {{-- class="{{ $representation->when < new DateTime(now()) ? 'txt-deco' : '' }}">{{ $representation->location->designation }}</span> --}}
+                                    {{-- </li> --}}
                                 @endforeach
                             </ul>
                             </p>
